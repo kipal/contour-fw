@@ -1,5 +1,5 @@
 {
-    "name"        : "contour",
+    "name"        : "contour-fw",
     "version"     : "0.0.1",
     "dependencies": {
         "require-directory": "1.0.0"
