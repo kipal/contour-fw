@@ -1,0 +1,167 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@1.3.2
+3 info using node@v0.10.13
+4 verbose publish [ '.' ]
+5 verbose cache add [ '.', null ]
+6 verbose cache add name=undefined spec="." args=[".",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: '.',
+7 verbose parsed url   path: '.',
+7 verbose parsed url   href: '.' }
+8 silly lockFile 3a52ce78- .
+9 verbose lock . /home/kipal/.npm/3a52ce78-.lock
+10 verbose tar pack [ '/home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/tmp.tgz',
+10 verbose tar pack   '.' ]
+11 verbose tarball /home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/tmp.tgz
+12 verbose folder .
+13 info prepublish contour@0.0.1
+14 silly lockFile 1f1177db-tar tar://.
+15 verbose lock tar://. /home/kipal/.npm/1f1177db-tar.lock
+16 silly lockFile af927114-1143-0-21898645861074328-tmp-tgz tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/tmp.tgz
+17 verbose lock tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/tmp.tgz /home/kipal/.npm/af927114-1143-0-21898645861074328-tmp-tgz.lock
+18 silly lockFile 1f1177db-tar tar://.
+19 silly lockFile 1f1177db-tar tar://.
+20 silly lockFile af927114-1143-0-21898645861074328-tmp-tgz tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/tmp.tgz
+21 silly lockFile af927114-1143-0-21898645861074328-tmp-tgz tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/tmp.tgz
+22 verbose tar unpack /home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/tmp.tgz
+23 silly lockFile 8b3ec1f9-1143-0-21898645861074328-package tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/package
+24 verbose lock tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/package /home/kipal/.npm/8b3ec1f9-1143-0-21898645861074328-package.lock
+25 silly lockFile af927114-1143-0-21898645861074328-tmp-tgz tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/tmp.tgz
+26 verbose lock tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/tmp.tgz /home/kipal/.npm/af927114-1143-0-21898645861074328-tmp-tgz.lock
+27 silly gunzTarPerm modes [ '755', '644' ]
+28 silly gunzTarPerm extractEntry package.json
+29 silly gunzTarPerm modified mode [ 'package.json', 436, 420 ]
+30 silly gunzTarPerm extractEntry README.md
+31 silly gunzTarPerm modified mode [ 'README.md', 436, 420 ]
+32 silly gunzTarPerm extractEntry index.js
+33 silly gunzTarPerm modified mode [ 'index.js', 436, 420 ]
+34 silly gunzTarPerm extractEntry Core/ClientScript.js
+35 silly gunzTarPerm modified mode [ 'Core/ClientScript.js', 436, 420 ]
+36 silly gunzTarPerm extractEntry Core/Server.js
+37 silly gunzTarPerm modified mode [ 'Core/Server.js', 436, 420 ]
+38 silly lockFile 8b3ec1f9-1143-0-21898645861074328-package tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/package
+39 silly lockFile 8b3ec1f9-1143-0-21898645861074328-package tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/package
+40 silly lockFile af927114-1143-0-21898645861074328-tmp-tgz tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/tmp.tgz
+41 silly lockFile af927114-1143-0-21898645861074328-tmp-tgz tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/tmp.tgz
+42 verbose tar pack [ '/home/kipal/.npm/contour/0.0.1/package.tgz',
+42 verbose tar pack   '/home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/package' ]
+43 verbose tarball /home/kipal/.npm/contour/0.0.1/package.tgz
+44 verbose folder /home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/package
+45 silly lockFile 8b3ec1f9-1143-0-21898645861074328-package tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/package
+46 verbose lock tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/package /home/kipal/.npm/8b3ec1f9-1143-0-21898645861074328-package.lock
+47 silly lockFile 68d805aa-al-npm-contour-0-0-1-package-tgz tar:///home/kipal/.npm/contour/0.0.1/package.tgz
+48 verbose lock tar:///home/kipal/.npm/contour/0.0.1/package.tgz /home/kipal/.npm/68d805aa-al-npm-contour-0-0-1-package-tgz.lock
+49 silly lockFile 8b3ec1f9-1143-0-21898645861074328-package tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/package
+50 silly lockFile 8b3ec1f9-1143-0-21898645861074328-package tar:///home/kipal/tmp/npm-22345/1394059311143-0.21898645861074328/package
+51 silly lockFile 68d805aa-al-npm-contour-0-0-1-package-tgz tar:///home/kipal/.npm/contour/0.0.1/package.tgz
+52 silly lockFile 68d805aa-al-npm-contour-0-0-1-package-tgz tar:///home/kipal/.npm/contour/0.0.1/package.tgz
+53 silly lockFile 5762f868--kipal-npm-contour-0-0-1-package /home/kipal/.npm/contour/0.0.1/package
+54 verbose lock /home/kipal/.npm/contour/0.0.1/package /home/kipal/.npm/5762f868--kipal-npm-contour-0-0-1-package.lock
+55 silly lockFile 5762f868--kipal-npm-contour-0-0-1-package /home/kipal/.npm/contour/0.0.1/package
+56 silly lockFile 5762f868--kipal-npm-contour-0-0-1-package /home/kipal/.npm/contour/0.0.1/package
+57 verbose tar unpack /home/kipal/.npm/contour/0.0.1/package.tgz
+58 silly lockFile 08c949a6--kipal-npm-contour-0-0-1-package tar:///home/kipal/.npm/contour/0.0.1/package
+59 verbose lock tar:///home/kipal/.npm/contour/0.0.1/package /home/kipal/.npm/08c949a6--kipal-npm-contour-0-0-1-package.lock
+60 silly lockFile 68d805aa-al-npm-contour-0-0-1-package-tgz tar:///home/kipal/.npm/contour/0.0.1/package.tgz
+61 verbose lock tar:///home/kipal/.npm/contour/0.0.1/package.tgz /home/kipal/.npm/68d805aa-al-npm-contour-0-0-1-package-tgz.lock
+62 silly gunzTarPerm modes [ '755', '644' ]
+63 silly gunzTarPerm extractEntry package.json
+64 silly gunzTarPerm extractEntry README.md
+65 silly gunzTarPerm extractEntry index.js
+66 silly gunzTarPerm extractEntry Core/ClientScript.js
+67 silly gunzTarPerm extractEntry Core/Server.js
+68 silly lockFile 08c949a6--kipal-npm-contour-0-0-1-package tar:///home/kipal/.npm/contour/0.0.1/package
+69 silly lockFile 08c949a6--kipal-npm-contour-0-0-1-package tar:///home/kipal/.npm/contour/0.0.1/package
+70 silly lockFile 68d805aa-al-npm-contour-0-0-1-package-tgz tar:///home/kipal/.npm/contour/0.0.1/package.tgz
+71 silly lockFile 68d805aa-al-npm-contour-0-0-1-package-tgz tar:///home/kipal/.npm/contour/0.0.1/package.tgz
+72 verbose chmod /home/kipal/.npm/contour/0.0.1/package.tgz 644
+73 verbose chown /home/kipal/.npm/contour/0.0.1/package.tgz [ 1000, 1000 ]
+74 silly lockFile 3a52ce78- .
+75 silly lockFile 3a52ce78- .
+76 silly publish { name: 'contour',
+76 silly publish   version: '0.0.1',
+76 silly publish   dependencies: { 'require-directory': '1.0.0' },
+76 silly publish   repository: { type: 'git', url: 'git@github.com:kipal/NodeMongoAdmin' },
+76 silly publish   author: { name: 'Nandor Kiss', email: 'kipal42@gmail.com' },
+76 silly publish   readme: 'Contour Framework\n=================',
+76 silly publish   readmeFilename: 'README.md',
+76 silly publish   description: 'Contour Framework =================',
+76 silly publish   bugs: { url: 'https://github.com/kipal/NodeMongoAdmin/issues' },
+76 silly publish   _id: 'contour@0.0.1',
+76 silly publish   dist: { shasum: 'c4c9af52673f108b32c65a266a260bde0dccbeed' },
+76 silly publish   _from: '.' }
+77 verbose url raw contour
+78 verbose url resolving [ 'https://registry.npmjs.org/', './contour' ]
+79 verbose url resolved https://registry.npmjs.org/contour
+80 info trying registry request attempt 1 at 23:41:55
+81 http PUT https://registry.npmjs.org/contour
+82 http 503 https://registry.npmjs.org/contour
+83 verbose bad json <?xml version="1.0" encoding="utf-8"?>
+83 verbose bad json <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+83 verbose bad json  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+83 verbose bad json <html>
+83 verbose bad json   <head>
+83 verbose bad json     <title>503 Resource temporarily unavailable</title>
+83 verbose bad json   </head>
+83 verbose bad json   <body>
+83 verbose bad json     <h1>Error 503 Resource temporarily unavailable</h1>
+83 verbose bad json     <p>Resource temporarily unavailable</p>
+83 verbose bad json     <h3>Guru Meditation:</h3>
+83 verbose bad json     <p>XID: 2761540605</p>
+83 verbose bad json     <hr>
+83 verbose bad json     <p>Varnish cache server</p>
+83 verbose bad json   </body>
+83 verbose bad json </html>
+84 error registry error parsing json
+85 info retry will retry, error on last attempt: SyntaxError: Unexpected token <
+85 info retry
+85 info retry <?xml version="1.0" encoding="utf-8"?>
+85 info retry <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+85 info retry  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+85 info retry <html>
+85 info retry   <head>
+85 info retry     <title>503 Resource temporarily unavailable</title>
+85 info retry   </head>
+85 info retry   <body>
+85 info retry     <h1>Error 503 Resource temporarily unavailable</h1>
+85 info retry     <p>Resource temporarily unavailable</p>
+85 info retry     <h3>Guru Meditation:</h3>
+85 info retry     <p>XID: 2761540605</p>
+85 info retry     <hr>
+85 info retry     <p>Varnish cache server</p>
+85 info retry   </body>
+85 info retry </html>
+86 info trying registry request attempt 2 at 23:42:21
+87 http PUT https://registry.npmjs.org/contour
+88 http 403 https://registry.npmjs.org/contour
+89 error publish Failed PUT response undefined
+90 error Error: login error
+90 error     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:82:22)
+90 error     at CouchLogin.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/node_modules/couch-login/couch-login.js:177:14)
+90 error     at CouchLogin.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/node_modules/couch-login/couch-login.js:159:46)
+90 error     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/index.js:148:22)
+90 error     at Request.EventEmitter.emit (events.js:98:17)
+90 error     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/index.js:876:14)
+90 error     at Request.EventEmitter.emit (events.js:117:20)
+90 error     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/index.js:827:12)
+90 error     at IncomingMessage.EventEmitter.emit (events.js:117:20)
+90 error     at _stream_readable.js:910:16
+91 error If you need help, you may report this log at:
+91 error     <http://github.com/isaacs/npm/issues>
+91 error or email it to:
+91 error     <npm-@googlegroups.com>
+92 error System Linux 3.8.0-35-generic
+93 error command "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+94 error cwd /home/kipal/Documents/ELTE/Diplomamunka/NodeMyMongo/node_modules/Contour
+95 error node -v v0.10.13
+96 error npm -v 1.3.2
+97 verbose exit [ 1, true ]

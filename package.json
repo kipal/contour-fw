@@ -1,0 +1,9 @@
+{
+    "name"        : "contour",
+    "version"     : "0.0.1",
+    "dependencies": {
+        "require-directory": "1.0.0"
+    },
+    "repository": "git@github.com:kipal/NodeMongoAdmin",
+  "author": "Nandor Kiss <kipal42@gmail.com>"
+}
