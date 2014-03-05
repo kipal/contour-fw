@@ -1,6 +1,6 @@
 {
     "name"        : "contour-fw",
-    "version"     : "0.0.2",
+    "version"     : "0.0.3",
     "dependencies": {
         "require-directory": "1.0.0"
     },
