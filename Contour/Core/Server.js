@@ -5,9 +5,20 @@ module.exports = (function () {
     var url  = require('url');
 
     function Server(port, responseHandler) {
-        var start = function () {
+        var isCurrent = false;
+
+        this.setIsCurrent = function (currentVar) {
+            isCurrent = currentVar;
+        };
+
+        this.getIsCurrent = function () {
+            return isCurrent;
+        }
+
+        this.start = function () {
             http.createServer(this.handleRequest).listen(port);
         }.bind(this);
+
 
         this.handleRequest = function (request, response) {
             var body = '';
@@ -21,9 +32,6 @@ module.exports = (function () {
             });
         };
 
-        return {
-            start : start
-        };
     };
 
     return Server;
