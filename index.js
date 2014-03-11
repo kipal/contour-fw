@@ -33,8 +33,8 @@ module.exports = (function (config) {
         }
     };
 
-    var Contour          = {
-            Core : {}
+    global.Contour      = {
+        Core : {}
     };
 
     Contour.Core.Util = require(__dirname + '/Contour/Core/Util.js')(config, Contour);

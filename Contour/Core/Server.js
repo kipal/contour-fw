@@ -5,6 +5,7 @@ module.exports = (function () {
     var url  = require('url');
 
     function Server(port, responseHandler) {
+        console.log(responseHandler);
         var isCurrent = false;
 
         this.setIsCurrent = function (currentVar) {
@@ -28,6 +29,7 @@ module.exports = (function () {
 
             request.on('end', function () {
                 var pathName = url.parse(request.url).pathname;
+
                 return response.end(responseHandler.getResponse(pathName, request));
             });
         };
@@ -35,6 +37,5 @@ module.exports = (function () {
     };
 
     return Server;
-
 }());
 
