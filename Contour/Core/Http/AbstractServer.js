@@ -43,7 +43,7 @@ module.exports = (function () {
             undefined === responseHandler
             || undefined === responseHandler['getResponse']
             || null === responseHandler['getResponse']
-            || 'function' === typeof responseHandler['getResponse']
+            || 'Function' === typeof responseHandler['getResponse']
         ) {
             throw 'Responsehandler has not getResponse method!';
         }

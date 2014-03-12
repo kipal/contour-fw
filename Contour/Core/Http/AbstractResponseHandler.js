@@ -6,4 +6,6 @@ module.exports = (function () {
             throw 'Abstract method!';
         }
     }
-} ());
+
+    return ResponseHandler;
+}());
