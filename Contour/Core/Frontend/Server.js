@@ -2,9 +2,9 @@ module.exports = (function (AbstractServer) {
     'use strict';
 
     function Server(port) {
-        // TODO extends AbstractResponseHandler
-
         AbstractServer.call(this, port);
     }
-}(Contour.Core.Server));
+
+    return Server;
+}(require(__dirname + '/../Http/AbstractServer.js')));
 // TODO include method implement

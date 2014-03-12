@@ -4,8 +4,10 @@ module.exports = (function () {
     var http = require('http');
     var url  = require('url');
 
+    /**
+     * TODO:
+     */
     function Server(port, responseHandler) {
-        console.log(responseHandler);
         var isCurrent = false;
 
         this.setIsCurrent = function (currentVar) {
@@ -14,7 +16,9 @@ module.exports = (function () {
 
         this.getIsCurrent = function () {
             return isCurrent;
-        }
+        };
+
+
 
         this.start = function () {
             http.createServer(this.handleRequest).listen(port);
@@ -33,6 +37,16 @@ module.exports = (function () {
                 return response.end(responseHandler.getResponse(pathName, request));
             });
         };
+
+        // TODO outsourcing the function exist check.
+        if (
+            undefined === responseHandler
+            || undefined === responseHandler['getResponse']
+            || null === responseHandler['getResponse']
+            || 'function' === typeof responseHandler['getResponse']
+        ) {
+            throw 'Responsehandler has not getResponse method!';
+        }
 
     };
 
