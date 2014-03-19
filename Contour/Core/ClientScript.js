@@ -1,87 +1,72 @@
-module.exports.module = (function(Module, Extender, Exception) {
-    'use strict';
+/**
+ * @summary ClientScript module can:
+ *  - read out the current object permitted (by `publics` method) members
+ *  - cache the stringify content in module pattern
+ *  - write out by `toClientScript`
+ */
+module.exports = (function () {
+    "use strict";
 
-    var ClientScript = function ClientScript() {
-        Module.call(this);
+    // Minden member kiírja majd magát
+    function Member(name, content) {
+        this.toClientScript = function () {
+            throw 'AbstractMethod toClientScript';
+        };
+    }
 
-        var createModulePattern = function () {
+    function PrivateMember(name, content) {
+        Member.call(this);
 
-            var params     = function () {
-                var params    = this.getParams(),
-                    paramStr  = '',
-                    lastComma = -1;
-
-                if (!(params instanceof Object)) {
-                    throw new Exception.NotObjectException();
-                }
-
-                for (var i in params) {
-                    paramStr += params[i] + ', ';
-                }
-
-                lastComma = paramStr.lastIndexOf(', ');
-                if (-1 !== lastComma) {
-                    paramStr = paramStr.replaceAt(lastComma, '');
-                }
-
-                return paramStr;
-            }.apply(this);
-
-            var variableList = function () {
-                var paramList = this.getVariableList(),
-                    paramStr  = 'var ',
-                    lastComma = -1,
-                    tmpValue  = {};
-
-                for(var i in paramList) {
-                    tmpValue = JSON.stringify(paramList[i]);
-
-                    paramStr += i + ' = ' + tmpValue + ',';
-                }
-
-                lastComma = paramStr.lastIndexOf(',');
-                if (-1 !== lastComma) {
-                    paramStr = paramStr.replaceAt(lastComma, ';');
-                }
-
-                return paramStr;
-            }.apply(this);
-
-            var functionList = function () {
-                return 'var semmi = function semmi () {};';
-            }.apply(this);
-
-            var dependencies = function () {
-                return '';
-            }.apply(this);
-
-            var modulePattern = 'var ' + this.getModuleName() + ' = (function (' + params + ') {'
-                + variableList
-                + functionList
-                + '} (' + dependencies + '));';
-
-            return modulePattern;
-        }.bind(this);
+        this.getValue = function () {
+            throw 'AbstractMethod getValue';
+        };
 
         this.toClientScript = function () {
-            return createModulePattern();
+            return 'var ' + name + " = " + this.getValue();
         };
+    }
+
+    function MemberFactory() {
+
+    }
+
+    // Ez fogja visszaadni eldönteni, hogy melyik a megfelelő osztály a member-nek.
+    MemberFactory.getMember = function (module, memberName, memberValue) {
+        if (module.hasOwnProperty(memberName)) {
+
+        }
     };
 
-    ClientScript.prototype.getModuleName = function () {
-        throw new Exception.AbstractMethodException("getModuleName");
+    // A register ilyen object-eket tartalmaz majd.
+    function ModuleContainer() {
+
+        this.addMember = function (name, memberValue) {
+
+        };
+    }
+
+    function ClientScript(moduleName) {
+
+        ClientScript.register[moduleName] = new ModuleContainer(this);
+
+        this.getModuleName = function () {
+            return moduleName;
+        };
+    }
+
+    ClientScript.register = {};
+
+    // Ezzel csak privilege-eket tudok adni, meg private-okat (hasOwnProperty false => private)
+    ClientScript.prototype.publish = function (name, value) {
+        if (undefined === ClientScript.register[this.getModuleName]) {
+
+        }
     };
 
-    ClientScript.prototype.getParams = function () {
-        throw new Exception.AbstractMethodException("getParams");
+    // Ezzel meg a prototypeokat tudom majd kezelni (hasOwnProperty false => prototype)
+    ClientScript.publish = function (module, name, value) {
+
     };
-
-    ClientScript.prototype.getVariableList = function () {
-        throw new Exception.AbstractMethodException("getVariableList");
-    };
-
-    Extender.extend(ClientScript, Module);
-
 
     return ClientScript;
-});
+}());
