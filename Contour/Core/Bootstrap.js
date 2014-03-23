@@ -36,8 +36,7 @@ module.exports = (function () {
     };
 
     Bootstrap.prototype.run = function () {
-        var currentServer = this.getCurrentServer();
-        currentServer.start();
+        this.getCurrentServer().start();
     };
 
     return new Bootstrap();

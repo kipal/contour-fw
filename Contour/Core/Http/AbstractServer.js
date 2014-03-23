@@ -32,9 +32,17 @@ module.exports = (function () {
             });
 
             request.on('end', function () {
-                var pathName = url.parse(request.url).pathname;
+                var pathName = url.parse(request.url).pathname,
+                    res      = responseHandler.getResponse(pathName, request);
 
-                return response.end(responseHandler.getResponse(pathName, request));
+                if (res) {
+                    response.writeHeader(200, res.header);
+
+                    return response.end(res.body);
+                } else {
+                    return response.end("Kezeletlen, valószínűleg static!");
+                }
+
             });
         };
 

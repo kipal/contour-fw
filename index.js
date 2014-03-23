@@ -1,10 +1,6 @@
 module.exports = (function (config) {
     'use strict';
 
-    if (undefined === global.App) {
-        throw 'Not found App!';
-    }
-
     var check = function(path){
         if (path.match(/node_modules/)) {
 
@@ -48,6 +44,12 @@ module.exports = (function (config) {
 
     var requireDirectory = require('require-directory'),
     tmpModule            = requireDirectory(module, __dirname, check).Contour;
+
+    config.serviceRoot.reference = requireDirectory(config.serviceRoot.moduleReference, config.serviceRoot.path, check);
+
+    Contour.currentService = function () {
+        return config.serviceRoot.reference;
+    };
 
     return Contour.Core.Util.extendDeep(tmpModule, Contour);
 });

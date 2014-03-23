@@ -1,6 +1,12 @@
 module.exports = (function (AbstractResponseHandler) {
     'use strict';
 
+    function Response(header, body) {
+        this.header = header;
+
+        this.body   = body;
+    }
+
     function ResponseHandler() {
         AbstractResponseHandler.call(this);
 
@@ -22,27 +28,50 @@ module.exports = (function (AbstractResponseHandler) {
         };
 
         this.handleFirstRequest = function () {
-            return '<!DOCTYPE html>'
-                + '<html>'
-                    + '<head>'
-                        + '<script src="/contour"></script>'
-                        + '<script src="/app"></script>'
-                    + '</head>'
-                    + '<body>'
-                    + '</body>'
-                + '</html>';
+            return new Response(
+                {
+                    "Content-Type" : "text/html"
+                },
+                '<!DOCTYPE html>'
+                    + '<html>'
+                        + '<head>'
+                            + '<script src="/contour"></script>'
+                            + '<script src="/app"></script>'
+                        + '</head>'
+                        + '<body>'
+                        + '</body>'
+                    + '</html>'
+            );
         };
 
         this.handleContourRequest = function () {
-            return 'TODO contour.toClientScript()';
+            return new Response(
+                    {
+                        "Content-Type" : "application/javascript"
+                    },
+                    Contour.Core.ClientScript.Register.printAll()
+            );
         };
 
         this.handleAppRequest     = function () {
-            return 'TODO app.toClientScript()';
+            return new Response(
+                    {
+                        "Content-Type" : "application/javascript"
+                    },
+                    // Ez nem túl dinamikus így
+                    Contour.currentService().ClientScript.Register.printAll()
+            );
         };
 
         this.handleOtherRequest = function (request) {
-            return JSON.stringify(request);
+            return JSON.stringify(
+                new Response(
+                        {
+                            "Content-Type" : "application/javascript"
+                        },
+                        request
+                )
+            );
         };
     }
 

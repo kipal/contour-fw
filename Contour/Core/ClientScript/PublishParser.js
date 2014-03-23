@@ -5,9 +5,20 @@ module.exports = (function () {
     }
 
     PublishParser.parse = function (text) {
-        var r = /\/\* <private> \*\/(.|\n)*\/\* <\/private> \*\//gm;
 
-        return text.replace(r, "");
+        return PublishParser.parsePublish(
+                PublishParser.parsePrivate(text)
+        ) + "()";
+    };
+
+    PublishParser.parsePrivate = function (text) {
+        var privatePattern = /\/\* <private> \*\/(.|\n)*\/\* <\/private> \*\//gm;
+
+        return text.replace(privatePattern, "");
+    };
+
+    PublishParser.parsePublish = function (text) {
+        return text.replace(/\/\* <publish>/g, "").replace(/<\/publish> \*\//g, "");
     };
 
     return PublishParser;
