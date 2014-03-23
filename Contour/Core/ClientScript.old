@@ -7,6 +7,17 @@
 module.exports = (function () {
     "use strict";
 
+    function Reference(value) {
+        this.convertToString = function () {
+            throw 'Abstract convertToString';
+        };
+
+        this.toString = function () {
+            return this.convertToString() + ";";
+        };
+    }
+
+
     // Minden member kiírja majd magát
     function Member(name, content) {
         this.toClientScript = function () {
@@ -23,6 +34,18 @@ module.exports = (function () {
 
         this.toClientScript = function () {
             return 'var ' + name + " = " + this.getValue();
+        };
+    }
+
+    function PublicMember(name, content) {
+        Member.call(this);
+
+        this.getValue = function () {
+            throw 'AbstractMethod getValue';
+        };
+
+        this.toClientScript = function () {
+            return 'this.' + name + " = " + this.getValue();
         };
     }
 
@@ -45,7 +68,7 @@ module.exports = (function () {
         };
     }
 
-    function ClientScript(moduleName) {
+    function ClientScript(moduleName, constructorFunctionName) {
 
         ClientScript.register[moduleName] = new ModuleContainer(this);
 

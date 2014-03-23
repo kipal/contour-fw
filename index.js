@@ -34,11 +34,17 @@ module.exports = (function (config) {
     };
 
     global.Contour      = {
-        Core : {}
+        Core : {
+            Util         : {},
+            ClientScript : {
+                Module        : require(__dirname + '/Contour/Core/ClientScript/Module.js'),
+                Register      : require(__dirname + '/Contour/Core/ClientScript/Register.js'),
+                PublishParser : require(__dirname + '/Contour/Core/ClientScript/PublishParser.js')
+            }
+        }
     };
 
     Contour.Core.Util = require(__dirname + '/Contour/Core/Util.js')(config, Contour);
-
 
     var requireDirectory = require('require-directory'),
     tmpModule            = requireDirectory(module, __dirname, check).Contour;
