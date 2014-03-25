@@ -4,10 +4,10 @@ module.exports = (function () {
     function PublishParser() {
     }
 
-    PublishParser.parse = function (text) {
+    PublishParser.parse = function (reference) {
 
         return PublishParser.parsePublish(
-                PublishParser.parsePrivate(text)
+                PublishParser.parsePrivate(reference.toString())
         ) + "()";
     };
 

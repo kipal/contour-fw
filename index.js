@@ -14,7 +14,7 @@ module.exports = (function (config) {
         } else if(path.match(/(\.xml)|(\.md)/)) {
 
             return false;
-        } else if(path.match(/\.git.*/)) {
+        } else if(path.match(/\.git/)) {
 
             return false;
         } else if(path.match(/\package\.json/)) {
@@ -45,11 +45,13 @@ module.exports = (function (config) {
     var requireDirectory = require('require-directory'),
     tmpModule            = requireDirectory(module, __dirname, check).Contour;
 
-    config.serviceRoot.reference = requireDirectory(config.serviceRoot.moduleReference, config.serviceRoot.path, check);
-
     Contour.currentService = function () {
         return config.serviceRoot.reference;
     };
 
-    return Contour.Core.Util.extendDeep(tmpModule, Contour);
+    Contour.Core.Util.extendDeep(tmpModule, Contour);
+
+    config.serviceRoot.reference = requireDirectory(config.serviceRoot.moduleReference, config.serviceRoot.path, check);
+
+    return Contour;
 });

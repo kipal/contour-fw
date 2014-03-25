@@ -11,7 +11,7 @@ module.exports = (function () {
 
     Register.addModule = function (moduleName, moduleReference) {
         if (undefined === Register.moduleStringContainer[moduleName]) {
-            Register.moduleStringContainer[moduleName] = Contour.Core.ClientScript.PublishParser.parse(moduleReference.toString());
+            Register.moduleStringContainer[moduleName] = Contour.Core.ClientScript.PublishParser.parse(moduleReference);
         }
     };
 
