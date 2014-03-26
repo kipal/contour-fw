@@ -1,13 +1,11 @@
-module.exports = (function (AbstractServer, FrontendReqHandler) {
-    'use strict';
+module.exports = new Module(
+    function (AbstractServer, FrontendReqHandler) {
+        'use strict';
 
-    function Server(port) {
-        AbstractServer.call(this, port, new FrontendReqHandler());
+        function Server(port) {
+            AbstractServer.call(this, port, new FrontendReqHandler());
+        }
+
+        return Server;
     }
-
-    return Server;
-}(
-    require(__dirname + '/../Http/AbstractServer.js'),
-    require(__dirname + '/ResponseHandler.js')
-));
-// TODO include method implement
+).dep("Contour.Core.Http.AbstractServer", "Contour.Core.Http.AbstractResponseHandler");

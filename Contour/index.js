@@ -1,0 +1,1 @@
+module.exports = requireDir(module, __dirname);

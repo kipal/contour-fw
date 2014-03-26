@@ -1,17 +1,14 @@
-module.exports = new Contour.Core.ClientScript.Module("Server", function () {
-    'use strict';
+module.exports = new Module(
+    function (AbstractServer) {
+        'use strict';
 
-    function MongoDBServer(port, reponseHandler) {
-        //AbstractServer.call(this, port, reponseHandler);
+        function MongoDBServer(port, reponseHandler) {
+            AbstractServer.call(this, port, reponseHandler);
+        }
+
+        MongoDBServer.prototype             = AbstractServer.prototype;
+        MongoDBServer.prototype.constructor = MongoDBServer;
+
+        return MongoDBServer;
     }
-    /* <private> */
-    var ize;
-    /* </private> */
-    var mize;
-
-    //MongoDBServer.prototype             = AbstractServer.prototype;
-    MongoDBServer.prototype.constructor = MongoDBServer;
-
-    return MongoDBServer;
-
-});
+).dep("Contour.Core.Http.AbstractServer");

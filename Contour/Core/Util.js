@@ -1,33 +1,35 @@
-module.exports = (function (configObject, contourObject) {
-    'use strict';
+module.exports = new Module(
+    function () {
+        'use strict';
 
-    function Util (config, rootObject) {
-        this.extendDeep = function (parent, child, force) {
-            var toStr = Object.prototype.toString,
-            astr = "[object Array]";
+        function Util () {
+            this.extendDeep = function (parent, child, force) {
+                var toStr = Object.prototype.toString,
+                astr = "[object Array]";
 
-            child = child || {};
+                child = child || {};
 
-            force = force || false;
+                force = force || false;
 
-            for (var i in parent) {
-                if (undefined !== child[i] && !force) {
-                    child[i] = this.extendDeep(parent[i], child[i], force);
-                } else if (typeof parent[i] === 'object') {
-                    child[i] = (toStr.call(parent[i]) === astr) ? [] : {};
-                    this.extendDeep(parent[i], child[i]);
-                } else {
-                    child[i] = parent[i];
+                for (var i in parent) {
+                    if (undefined !== child[i] && !force) {
+                        child[i] = this.extendDeep(parent[i], child[i], force);
+                    } else if (typeof parent[i] === 'object') {
+                        child[i] = (toStr.call(parent[i]) === astr) ? [] : {};
+                        this.extendDeep(parent[i], child[i]);
+                    } else {
+                        child[i] = parent[i];
+                    }
                 }
-            }
 
-            return child;
+                return child;
+            };
+
+            this.include = function (moduleName) {
+                moduleName = moduleName.split('.');
+            };
         };
 
-        this.include = function (moduleName) {
-            moduleName = moduleName.split('.');
-        };
-    };
-
-    return new Util(configObject, contourObject);
-});
+        return new Util();
+    }
+);
