@@ -22,7 +22,10 @@ module.exports = new Module(
 
             Register.cache += "(function () {";
             for (var i in Register.moduleStringContainer) {
-                Register.cache += "\n" + i + " = " +  Register.moduleStringContainer[i];
+
+                if (Register.moduleStringContainer.hasOwnProperty(i)) {
+                    Register.cache += "\n" + i + " = " +  Register.moduleStringContainer[i];
+                }
             }
             Register.cache += "}.call(window))";
 

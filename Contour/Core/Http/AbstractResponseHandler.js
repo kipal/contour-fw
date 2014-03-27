@@ -3,9 +3,10 @@ module.exports = new Module(
         'use strict';
 
         function ResponseHandler() {
+
             this.getResponse = function () {
                 throw 'Abstract method!';
-            }
+            };
         }
 
         return ResponseHandler;

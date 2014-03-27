@@ -8,12 +8,7 @@ module.exports = (function (config) {
         basePath : __dirname + "/Contour"
     };
 
-    console.log("Module loading...");
+    console.log("Contour module loading...");
         global.Contour = require("./Contour/");
-    console.log("Modules are loaded.");
-
-
-    Contour.currentService = function () {
-        return config.serviceRoot.reference;
-    };
+    console.log("Contour modules are loaded.");
 });

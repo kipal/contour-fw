@@ -8,7 +8,7 @@ module.exports = new Module(
             this.body   = body;
         }
 
-        function ResponseHandler() {
+        function ResponseHandler(CurrentServiceRegister) {
             AbstractResponseHandler.call(this);
 
             this.getResponse = function (path, request) {
@@ -59,8 +59,7 @@ module.exports = new Module(
                         {
                             "Content-Type" : "application/javascript"
                         },
-                        // Ez nem túl dinamikus így
-                        Contour.currentService().ClientScript.Register.printAll()
+                        CurrentServiceRegister.printAll()
                 );
             };
 

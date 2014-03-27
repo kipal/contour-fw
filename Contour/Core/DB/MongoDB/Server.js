@@ -2,8 +2,8 @@ module.exports = new Module(
     function (AbstractServer) {
         'use strict';
 
-        function MongoDBServer(port, reponseHandler) {
-            AbstractServer.call(this, port, reponseHandler);
+        function MongoDBServer(port) {
+            //AbstractServer.call(this, port);
         }
 
         MongoDBServer.prototype             = AbstractServer.prototype;

@@ -1,5 +1,6 @@
 module.exports = new Module(
     function () {
+
         function Bootstrap() {
             var config = {};
 
@@ -37,9 +38,13 @@ module.exports = new Module(
         };
 
         Bootstrap.prototype.run = function () {
+            if (undefined === this.getCurrentServer()) {
+                throw 'Not found current server!';
+            }
+
             this.getCurrentServer().start();
         };
 
-        return new Bootstrap();
+        return Bootstrap;
     }
 );

@@ -47,9 +47,9 @@ module.exports = new Module(
             // TODO outsourcing the function exist check.
             if (
                 undefined === responseHandler
-                || undefined === responseHandler['getResponse']
-                || null === responseHandler['getResponse']
-                || 'Function' === typeof responseHandler['getResponse']
+                //|| undefined === responseHandler['getResponse']
+                //|| null === responseHandler['getResponse']
+                //|| 'Function' === typeof responseHandler['getResponse']
             ) {
                 throw 'Responsehandler has not getResponse method!';
             }
