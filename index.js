@@ -8,7 +8,7 @@ module.exports = (function (config) {
         basePath : __dirname + "/Contour"
     };
 
-    console.log("Contour module loading...");
-        global.Contour = require("./Contour/");
-    console.log("Contour modules are loaded.");
+    global.Contour.deepExtend(require("./Contour/"));
+
+    console.log(Contour)
 });

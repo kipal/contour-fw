@@ -50,17 +50,12 @@ module.exports = new Module(
                         {
                             "Content-Type" : "application/javascript"
                         },
-                        Contour.Core.ClientScript.Register.printAll()
+                        Contour.ClientScript.Register.printAll()
                 );
             };
 
             this.handleAppRequest     = function () {
-                return new Response(
-                        {
-                            "Content-Type" : "application/javascript"
-                        },
-                        CurrentServiceRegister.printAll()
-                );
+                throw 'FrontendResponseHanlder::handleAppRequest is abstract!';
             };
 
             this.handleOtherRequest = function (request) {

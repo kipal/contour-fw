@@ -1,37 +1,35 @@
 module.exports = new Module(
-    function () {
+    function (parser) {
 
         function Register() {
+            this.cache                 = "";
 
-        }
+            this.moduleStringContainer = {};
 
-        Register.cache                 = "";
-
-        Register.moduleStringContainer = {};
-
-        Register.addModule = function (moduleName, moduleReference) {
-            if (undefined === Register.moduleStringContainer[moduleName]) {
-                Register.moduleStringContainer[moduleName] = Contour.Core.ClientScript.PublishParser.parse(moduleReference);
-            }
-        };
-
-        Register.printAll = function () {
-            if ("" !== Register.cache) {
-                return Register.cache;
-            }
-
-            Register.cache += "(function () {";
-            for (var i in Register.moduleStringContainer) {
-
-                if (Register.moduleStringContainer.hasOwnProperty(i)) {
-                    Register.cache += "\n" + i + " = " +  Register.moduleStringContainer[i];
+            this.addModule             = function (moduleName, moduleReference) {
+                if (undefined === this.moduleStringContainer[moduleName]) {
+                    this.moduleStringContainer[moduleName] = parser.parse(moduleReference);
                 }
-            }
-            Register.cache += "}.call(window))";
+            };
 
-            return Register.cache;
-        };
+            this.printAll              = function () {
+                if ("" !== this.cache) {
+                    return this.cache;
+                }
+
+                this.cache += "(function () {";
+                for (var i in this.moduleStringContainer) {
+
+                    if (this.moduleStringContainer.hasOwnProperty(i)) {
+                        this.cache += "\n" + i + " = " +  this.moduleStringContainer[i];
+                    }
+                }
+                this.cache += "}.call(window))";
+
+                return this.cache;
+            };
+        }
 
         return Register;
     }
-);
+).dep(false);
