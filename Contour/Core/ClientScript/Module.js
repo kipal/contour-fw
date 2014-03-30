@@ -1,9 +1,19 @@
 module.exports = new Module(
     function (register) {
-        function ClientScriptModule(moduleName, moduleReference, dependencies) {
+
+        function ClientScriptModule(moduleName, dependencies, visibility, moduleReference) {
             "use strict";
 
-            register.addModule(moduleName, moduleReference);
+            // osztaly szerint szetszedni, absztraktalni, majd specializalni
+            switch (visibility) {
+                case "public":
+                    register.addPublicModule(moduleName, moduleReference, dependencies);
+                    break;
+                case "private":
+                default:
+                    register.addPrivateModule(moduleName, moduleReference, dependencies);
+                    break;
+            }
 
             Module.call(this, moduleReference);
         }

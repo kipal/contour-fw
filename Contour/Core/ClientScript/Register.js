@@ -2,14 +2,48 @@ module.exports = new Module(
     function (parser) {
 
         function Register(rootName) {
+
+            var moduleStringContainer = {
+                    "private" : {},
+                    "public"  : {}
+            };
+
+            var addModule = function (visibility, moduleName, moduleReference, dependencies) {
+                if (undefined === moduleStringContainer[visibility][moduleName]) {
+                    moduleStringContainer[visibility][moduleName] = parser.parse(moduleReference, dependencies);
+                }
+            };
+
+            var printAll = function (visibility, container) {
+                var result = '';
+
+                switch (visibility) {
+                    case "public" :
+                        visibility = "this.";
+                        break;
+                    case "private":
+                        visibility = "var ";
+                    default:
+                        break;
+                }
+
+                for (var i in container) {
+                    if (container.hasOwnProperty(i)) {
+                        result += "\n    " + visibility + i + " = " +  container[i] + "\n";
+                    }
+                }
+
+                return result;
+            };
+
             this.cache                 = "";
 
-            this.moduleStringContainer = {};
+            this.addPrivateModule      = function (moduleName, moduleReference, dependencies) {
+                addModule("private", moduleName, moduleReference, dependencies);
+            };
 
-            this.addModule             = function (moduleName, moduleReference) {
-                if (undefined === this.moduleStringContainer[moduleName]) {
-                    this.moduleStringContainer[moduleName] = parser.parse(moduleReference);
-                }
+            this.addPublicModule       = function (moduleName, moduleReference, dependencies) {
+                addModule("public", moduleName, moduleReference, dependencies);
             };
 
             this.printAll              = function () {
@@ -18,13 +52,13 @@ module.exports = new Module(
                 }
 
                 this.cache += "window." + rootName + " = (function () {";
-                for (var i in this.moduleStringContainer) {
 
-                    if (this.moduleStringContainer.hasOwnProperty(i)) {
-                        this.cache += "\n" + i + " = " +  this.moduleStringContainer[i];
-                    }
-                }
+                this.cache += printAll("private", moduleStringContainer["private"]);
+                this.cache += printAll("public", moduleStringContainer["public"]);
+
+
                 this.cache += "}());";
+
 
                 return this.cache;
             };

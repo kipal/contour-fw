@@ -3,9 +3,28 @@ module.exports = new Module(
 
         function Parser() {
 
-            this.parse = function (reference) {
-                // TODO dep
-                return parsePublish(parsePrivate(reference.toString())) + "()";
+            this.composeDeps = function (dependencies) {
+                if (false === dependencies) {
+
+                    return ';';
+                }
+
+                if ("string" === typeof dependencies) {
+
+                    return "(" + dependencies + ");";
+                }
+
+                if (0 < dependencies.length) {
+
+                    return "(" + dependencies.join(", ") + ");";
+                }
+
+                return "();";
+            };
+
+            this.parse = function (reference, dependencies) {
+
+                return parsePublish(parsePrivate(reference.toString())) + this.composeDeps(dependencies);
             };
 
             var parsePrivate = function (text) {
