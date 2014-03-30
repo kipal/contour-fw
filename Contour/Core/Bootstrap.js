@@ -29,6 +29,7 @@ module.exports = new Contour.ClientScript.Module(
             };
         }
 
+        /* <private> */
         Bootstrap.prototype.getCurrentServer = function () {
             var serverList = this.getConfig().servers;
             for (var type in serverList) {
@@ -47,6 +48,7 @@ module.exports = new Contour.ClientScript.Module(
 
             this.getCurrentServer().start();
         };
+        /* </private> */
 
         return Bootstrap;
     }
