@@ -1,7 +1,7 @@
 module.exports = new Module(
     function (parser) {
 
-        function Register() {
+        function Register(rootName) {
             this.cache                 = "";
 
             this.moduleStringContainer = {};
@@ -17,14 +17,14 @@ module.exports = new Module(
                     return this.cache;
                 }
 
-                this.cache += "(function () {";
+                this.cache += "window." + rootName + " = (function () {";
                 for (var i in this.moduleStringContainer) {
 
                     if (this.moduleStringContainer.hasOwnProperty(i)) {
                         this.cache += "\n" + i + " = " +  this.moduleStringContainer[i];
                     }
                 }
-                this.cache += "}.call(window))";
+                this.cache += "}());";
 
                 return this.cache;
             };
