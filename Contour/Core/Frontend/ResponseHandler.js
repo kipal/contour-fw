@@ -8,7 +8,7 @@ module.exports = new Module(
             this.body   = body;
         }
 
-        function ResponseHandler(CurrentServiceRegister) {
+        function ResponseHandler(currentServiceRegister) {
             AbstractResponseHandler.call(this);
 
             this.getResponse = function (path, request) {
@@ -50,12 +50,17 @@ module.exports = new Module(
                         {
                             "Content-Type" : "application/javascript"
                         },
-                        Contour.ClientScript.Register.printAll()
+                        Contour.ClientScript.Module.getRegister().printAll()
                 );
             };
 
             this.handleAppRequest     = function () {
-                throw 'FrontendResponseHanlder::handleAppRequest is abstract!';
+                return new Response(
+                        {
+                            "Content-Type" : "application/javascript"
+                        },
+                        currentServiceRegister.printAll()
+                );
             };
 
             this.handleOtherRequest = function (request) {

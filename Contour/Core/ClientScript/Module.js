@@ -8,6 +8,10 @@ module.exports = new Module(
             Module.call(this, moduleReference);
         }
 
+        ClientScriptModule.getRegister = function() {
+            return register;
+        };
+
         ClientScriptModule.prototype             = Module.prototype;
         ClientScriptModule.prototype.constructor = ClientScriptModule;
 

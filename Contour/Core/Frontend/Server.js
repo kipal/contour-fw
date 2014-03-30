@@ -1,11 +1,11 @@
 module.exports = new Module(
-    function (AbstractServer, FrontendReqHandler) {
+    function (AbstractServer) {
         'use strict';
 
-        function Server(port, CurrentServiceScriptRegister) {
-            AbstractServer.call(this, port, new FrontendReqHandler(CurrentServiceScriptRegister));
+        function Server(port, frontendResponseHandler) {
+            AbstractServer.call(this, port, frontendResponseHandler);
         }
 
         return Server;
     }
-).dep("Contour.Core.Http.AbstractServer", "Contour.Core.Frontend.ResponseHandler");
+).dep("Contour.Core.Http.AbstractServer");
