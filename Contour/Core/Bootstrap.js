@@ -1,4 +1,7 @@
-module.exports = new Module(
+module.exports = new Contour.ClientScript.Module(
+    "Core.Bootstrap",
+    [],
+    "public",
     function () {
 
         function Bootstrap() {
