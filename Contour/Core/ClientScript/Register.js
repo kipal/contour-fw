@@ -1,16 +1,17 @@
 module.exports = new Module(
     function (parser) {
 
+        // TODO: dependencies
         function Register(rootName) {
 
             var moduleStringContainer = {
-                    "private" : {},
-                    "public"  : {}
+                "private" : {},
+                "public"  : {}
             };
 
             var initContainer        = {
-                    "private" : [],
-                    "public"  : []
+                "private" : [],
+                "public"  : []
             };
 
             var addModuleInit        = function (visibility, moduleName) {
