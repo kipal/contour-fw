@@ -24,6 +24,13 @@ module.exports = new Module(
                 return this;
             };
 
+            this.callback = function (fn) {
+
+                moduleReference.toString = fn.bind(this, Function.prototype.toString.call(moduleReference));
+
+                return this;
+            }
+
             this.signUp = function () {
                 switch (visibility) {
                     case "public":

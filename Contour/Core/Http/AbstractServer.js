@@ -16,6 +16,26 @@ module.exports = new Module(
                 return isCurrent;
             };
 
+            this.getHost = function () {
+
+                var os     = require('os');
+                var ifaces = os.networkInterfaces();
+
+                for (var i in ifaces) {
+                    for (var j in ifaces[i]) {
+                        if (
+                            undefined !== ifaces[i][j]["address"]
+                            && "IPv4" === ifaces[i][j]["family"]
+                            &&  '127.0.0.1' !== ifaces[i][j]["address"]
+                        ) {
+                            return ifaces[i][j]["address"];
+                        }
+                    }
+                }
+
+                return "semmi";
+            }
+
 
 
             this.start = function () {
