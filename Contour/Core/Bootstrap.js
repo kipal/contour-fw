@@ -1,6 +1,4 @@
 module.exports = new Contour.ClientScript.Module(
-    "Core.Bootstrap",
-    [],
     "public",
     function () {
 
@@ -52,4 +50,4 @@ module.exports = new Contour.ClientScript.Module(
 
         return Bootstrap;
     }
-);
+).setName("Core.Bootstrap").signUp();

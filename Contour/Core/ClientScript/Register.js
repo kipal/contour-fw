@@ -62,7 +62,7 @@ module.exports = new Module(
                         visibility = "this.";
                         break;
                     case "private":
-                        visibility = "var ";
+                        visibility = "";
                     default:
                         break;
                 }

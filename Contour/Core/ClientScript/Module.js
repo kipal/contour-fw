@@ -1,19 +1,42 @@
 module.exports = new Module(
     function (register) {
 
-        function ClientScriptModule(moduleName, dependencies, visibility, moduleReference) {
-            "use strict";
+        function ClientScriptModule(visibility, moduleReference) {
+            var moduleName   = "",
+                dependencies = [],
+                visibility   = "public";
 
-            // osztaly szerint szetszedni, absztraktalni, majd specializalni
-            switch (visibility) {
-                case "public":
-                    register.addPublicModule(moduleName, moduleReference, dependencies);
-                    break;
-                case "private":
-                default:
-                    register.addPrivateModule(moduleName, moduleReference, dependencies);
-                    break;
-            }
+            this.setName = function (name) {
+                moduleName = name;
+
+                return this;
+            };
+
+            this.setDependencies = function (deps) {
+                dependencies = deps
+
+                return this;
+            };
+
+            this.setVisibility = function (v) {
+                visibility = v;
+
+                return this;
+            };
+
+            this.signUp = function () {
+                switch (visibility) {
+                    case "public":
+                        register.addPublicModule(moduleName, moduleReference, dependencies);
+                        break;
+                    case "private":
+                    default:
+                        register.addPrivateModule(moduleName, moduleReference, dependencies);
+                        break;
+                }
+
+                return this;
+            };
 
             Module.call(this, moduleReference);
         }
