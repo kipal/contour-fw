@@ -1,7 +1,7 @@
 module.exports = new Module(
     function (register) {
 
-        function ClientScriptModule(visibility, moduleReference) {
+        function ClientScriptModule(moduleReference) {
             var moduleName   = "",
                 dependencies = [],
                 visibility   = "public";
