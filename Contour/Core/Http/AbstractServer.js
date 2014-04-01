@@ -51,7 +51,7 @@ module.exports = new Module(
 
                 request.on('end', function () {
                     var pathName = url.parse(request.url).pathname,
-                        res      = responseHandler.getResponse(pathName, request);
+                        res      = responseHandler.getResponse(pathName, body);
 
                     if (res) {
                         response.writeHeader(200, res.header);

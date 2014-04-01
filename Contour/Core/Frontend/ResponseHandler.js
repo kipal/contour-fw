@@ -1,12 +1,6 @@
 module.exports = new Module(
-    function (AbstractResponseHandler) {
+    function (AbstractResponseHandler, Response) {
         'use strict';
-
-        function Response(header, body) {
-            this.header = header;
-
-            this.body   = body;
-        }
 
         function ResponseHandler(currentServiceRegister) {
             AbstractResponseHandler.call(this);
@@ -29,10 +23,7 @@ module.exports = new Module(
             };
 
             this.handleFirstRequest = function () {
-                return new Response(
-                    {
-                        "Content-Type" : "text/html"
-                    },
+                return new Response().setHeader({"Content-Type" : "text/html"}).setBody(
                     '<!DOCTYPE html>'
                         + '<html>'
                             + '<head>'
@@ -46,36 +37,19 @@ module.exports = new Module(
             };
 
             this.handleContourRequest = function () {
-                return new Response(
-                        {
-                            "Content-Type" : "application/javascript"
-                        },
-                        Contour.ClientScript.Module.getRegister().printAll()
-                );
+                return new Response().setBody(Contour.ClientScript.Module.getRegister().printAll());
             };
 
             this.handleAppRequest     = function () {
-                return new Response(
-                        {
-                            "Content-Type" : "application/javascript"
-                        },
-                        currentServiceRegister.printAll()
-                );
+                return new Response().setBody(currentServiceRegister.printAll());
             };
 
             this.handleOtherRequest = function (request) {
-                return JSON.stringify(
-                    new Response(
-                            {
-                                "Content-Type" : "application/javascript"
-                            },
-                            request
-                    )
-                );
+                return  new Response().setBody(request);
             };
         }
 
         return ResponseHandler;
     }
 
-).dep("Contour.Core.Http.AbstractResponseHandler");
+).dep("Contour.Core.Http.AbstractResponseHandler", "Contour.Core.Http.Response");
