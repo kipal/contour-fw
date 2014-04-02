@@ -4,6 +4,8 @@ module.exports = new Module(
         // TODO: dependencies
         function Register(rootName) {
 
+            parser.register = this;
+
             var moduleStringContainer = {
                 "private" : {},
                 "public"  : {}
@@ -12,6 +14,34 @@ module.exports = new Module(
             var initContainer        = {
                 "private" : [],
                 "public"  : []
+            };
+
+            this.getVisibilityOfInitVar = function (variableName) {
+
+                for (var i in initContainer["private"]) {
+                    if (variableName === initContainer["private"][i]) {
+                        return "private";
+                    }
+                }
+
+                for (var i in initContainer["public"]) {
+                    if (variableName === initContainer["public"][i]) {
+                        return "public";
+                    }
+                }
+
+                for (var i in moduleStringContainer["public"]) {
+                    if (variableName === i) {
+                        return "public";
+                    }
+                }
+
+                for (var i in moduleStringContainer["private"]) {
+                    if (variableName === i) {
+                        return "private";
+                    }
+                }
+                return false;
             };
 
             var addModuleInit        = function (visibility, moduleName) {

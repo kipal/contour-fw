@@ -3,6 +3,8 @@ module.exports = new Module(
 
         function Parser() {
 
+            this.register = {};
+
             this.composeDeps = function (dependencies) {
                 if (false === dependencies) {
 
@@ -11,11 +13,19 @@ module.exports = new Module(
 
                 if ("string" === typeof dependencies) {
 
+                    if ("public" === this.register.getVisibilityOfInitVar(dependencies)) {
+                        dependencies = "this." + dependencies;
+                    }
+
                     return "(" + dependencies + ");";
                 }
 
                 if (0 < dependencies.length) {
-
+                    for (var i in dependencies) {
+                        if ("public" === this.register.getVisibilityOfInitVar(dependencies[i])) {
+                            dependencies[i] = "this." + dependencies[i];
+                        }
+                    }
                     return "(" + dependencies.join(", ") + ");";
                 }
 
