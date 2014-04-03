@@ -2,7 +2,6 @@ module.exports = new Contour.ClientScript.Module(
     function () {
 
         function Controller() {
-            this.view = new Contour.Core.MVC.View();
 
             this.registerEvent = function (elem, event, functionName) {
                 if (undefined === this[functionName] || "function" === typeof this[functionName]) {
