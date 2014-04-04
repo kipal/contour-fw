@@ -6,6 +6,26 @@ module.exports = new Module(
                 dependencies = [],
                 visibility   = "public";
 
+            this.out = function (config) {
+                if (undefined !== config["name"]) {
+                    moduleName = config.name;
+                }
+
+                if (undefined !== config["dep"]) {
+                    dependencies = config.dep;
+                }
+
+                if (undefined !== config["visibility"]) {
+                    visibility = config.visibility;
+                }
+
+                if (undefined !== config["callback"]) {
+                    this.callback(config.callback);
+                }
+
+                return this;
+            };
+
             this.setName = function (name) {
                 moduleName = name;
 
