@@ -10,10 +10,10 @@ module.exports = new Contour.ClientScript.Module(
                 }
             };
 
-            this.run = function () {
+            /*this.run = function () {
                 this.getView().innerHTML = "Contour Basic MainWidget!";
 
-            };
+            };*/
 
             AbstractWidget.call(this, document.getElementsByTagName("body")[0]);
         }

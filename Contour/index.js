@@ -1,7 +1,8 @@
 Contour.ClientScript = {};
-Contour.ClientScript.Parser   = require("./Core/ClientScript/Parser.js").getReference();
-Contour.ClientScript.Register = require("./Core/ClientScript/Register.js").getReference()(new Contour.ClientScript.Parser());
-Contour.ClientScript.Module   = require("./Core/ClientScript/Module.js").getReference()(new Contour.ClientScript.Register("Contour"));
+Contour.ClientScript.Parser     = require("./Core/ClientScript/Parser.js").getReference();
+Contour.ClientScript.DepChecker = require("./Core/ClientScript/DepChecker.js").getReference();
+Contour.ClientScript.Register   = require("./Core/ClientScript/Register.js").getReference()(new Contour.ClientScript.Parser(), Contour.ClientScript.DepChecker);
+Contour.ClientScript.Module     = require("./Core/ClientScript/Module.js").getReference()(new Contour.ClientScript.Register("Contour"));
 
 
 console.log("Contour.ClientScript on!\n");

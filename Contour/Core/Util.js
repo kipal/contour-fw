@@ -1,35 +1,50 @@
-module.exports = new Module(
+module.exports = new Contour.ClientScript.Module(
     function () {
         'use strict';
 
         function Util () {
-            this.extendDeep = function (parent, child, force) {
-                var toStr = Object.prototype.toString,
-                astr = "[object Array]";
+            String.prototype.repeat = function(n) {
+                return new Array(n + 1).join(this);
+            };
+        };
 
-                child = child || {};
+        Util.isEmpty = function (o) {
+            for (var key in o) {
+                if (o.hasOwnProperty(key)) {
 
-                force = force || false;
+                    return false;
+                }
+            }
 
-                for (var i in parent) {
-                    if (undefined !== child[i] && !force) {
-                        child[i] = this.extendDeep(parent[i], child[i], force);
-                    } else if (typeof parent[i] === 'object') {
-                        child[i] = (toStr.call(parent[i]) === astr) ? [] : {};
-                        this.extendDeep(parent[i], child[i]);
+            return true;
+        };
+
+        Util.deepExtend = function (child, parent) {
+            for (var i in parent) {
+                if (parent.hasOwnProperty(i)) {
+                    if ('object' === typeof parent[i]) {
+
+                        if ('[object Array]' === parent[i].toString()) {
+                            child[i] = [];
+                        } else {
+                            child[i] = {};
+                        }
+
+                        child[i].deepExtend(parent[i]);
                     } else {
                         child[i] = parent[i];
                     }
                 }
-
-                return child;
-            };
-
-            this.include = function (moduleName) {
-                moduleName = moduleName.split('.');
-            };
+            }
         };
 
-        return new Util();
+        Util.lateBind = function (o, key, value) {
+            if (!o.hasOwnProperty(key)) {
+                o[key] = value;
+            }
+        };
+
+
+        return Util;
     }
-);
+).out({"name" : "Core.Util"}).signUp();

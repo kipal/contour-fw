@@ -1,10 +1,11 @@
 module.exports = new Module(
-    function (parser) {
+    function (parser, DepSorter) {
 
-        // TODO: dependencies
         function Register(rootName) {
 
             parser.register = this;
+
+            var sorter = new DepSorter();
 
             var moduleStringContainer = {
                 "private" : {},
@@ -80,7 +81,10 @@ module.exports = new Module(
                 addModuleInit(visibility, moduleName);
 
                 if (undefined === moduleStringContainer[visibility][moduleName]) {
-                    moduleStringContainer[visibility][moduleName] = parser.parse(moduleReference, dependencies);
+                    moduleStringContainer[visibility][moduleName] = {
+                            module : moduleReference,
+                            dep    : dependencies
+                    };
                 }
             };
 
@@ -96,13 +100,25 @@ module.exports = new Module(
                     default:
                         break;
                 }
+                var deps = [];
 
                 for (var i in container) {
                     if (container.hasOwnProperty(i)) {
-                        result += "\n    " + visibility + i + " = " +  container[i] + "\n";
+
+                        deps.push({
+                            module : i,
+                            dep    : container[i].dep instanceof Array ? container[i].dep : [container[i].dep]
+                        });
                     }
                 }
 
+                sorter.setDeps(deps);
+                deps = sorter.sort();
+
+                for (var i = 0; i < deps.length; i++) {
+                    moduleName = deps[i].module;
+                    result += "\n    " + visibility + moduleName + " = " +  parser.parse(container[moduleName]["module"], container[moduleName]["dep"]) + "\n";
+                }
 
                 return result;
             };

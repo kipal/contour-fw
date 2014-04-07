@@ -1,5 +1,5 @@
 module.exports = new Contour.ClientScript.Module(
-    function (BaseController) {
+    function (BaseController, Util) {
         function Widget(parentDom, parentWidget) {
 
             var subWidgets = [];
@@ -11,16 +11,16 @@ module.exports = new Contour.ClientScript.Module(
             this.getView = function () {
                 return parentDom;
             };
-            // TODO csinálni egy függvényt, ami ezt automatikusan vizsgálja. (lateBind)
-            if (undefined === this.actions) {
-                this.actions = {};
-            }
 
-            if (undefined === this.run) {
-                this.run = function () {
+            Util.lateBind(this, "actions", {});
+
+            Util.lateBind(
+                this,
+                "run",
+                function () {
                     throw 'Widget::run is abstract!';
-                };
-            }
+                }
+            );
 
             this.createSubWidget = function (widgetFunction, subDomainFunction) {
                 var tmp = new widgetFunction(subDomainFunction.call(parentDom), this);
@@ -37,4 +37,4 @@ module.exports = new Contour.ClientScript.Module(
 
 
         return Widget;
-}).dep("Contour.Core.MVC.Controller").setDependencies("Core.MVC.Controller").setName("Core.MVC.Widget").signUp();
+}).dep("Contour.Core.MVC.Controller").setDependencies(["Core.MVC.Controller", "Core.Util"]).setName("Core.MVC.Widget").signUp();
