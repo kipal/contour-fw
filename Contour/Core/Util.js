@@ -38,7 +38,11 @@ module.exports = new Contour.ClientScript.Module(
             }
         };
 
-        Util.lateBind = function (o, key, value) {
+        Util.lateBind = function (key, value, o) {
+            if (undefined === o) {
+                o = this;
+            }
+
             if (!o.hasOwnProperty(key)) {
                 o[key] = value;
             }

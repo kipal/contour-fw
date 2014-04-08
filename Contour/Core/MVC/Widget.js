@@ -4,22 +4,26 @@ module.exports = new Contour.ClientScript.Module(
 
             var subWidgets = [];
 
-            this.createView = function () {
-                Contour.Core.MVC.View.call(parentDom, this.actions);
-            }.call(this);
+            Util.lateBind(
+                'createView',
+                function () {
+                    Contour.Core.MVC.View.call(parentDom, this.actions);
+                }.call(this),
+                this
+            );
 
             this.getView = function () {
                 return parentDom;
             };
 
-            Util.lateBind(this, "actions", {});
+            Util.lateBind("actions", {}, this);
 
             Util.lateBind(
-                this,
                 "run",
                 function () {
                     throw 'Widget::run is abstract!';
-                }
+                },
+                this
             );
 
             this.createSubWidget = function (widgetFunction, subDomainFunction) {
@@ -37,4 +41,4 @@ module.exports = new Contour.ClientScript.Module(
 
 
         return Widget;
-}).dep("Contour.Core.MVC.Controller").setDependencies(["Core.MVC.Controller", "Core.Util"]).setName("Core.MVC.Widget").signUp();
+}).dep("Contour.Core.MVC.Controller", "Contour.Core.Util").setDependencies(["Core.MVC.Controller", "Core.Util"]).setName("Core.MVC.Widget").signUp();

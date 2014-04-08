@@ -1,5 +1,5 @@
 module.exports = new Contour.ClientScript.Module(
-    function () {
+    function (Util) {
 
         function Controller() {
 
@@ -17,4 +17,9 @@ module.exports = new Contour.ClientScript.Module(
         }
 
         return Controller;
-}).setName("Core.MVC.Controller").signUp();
+    }
+).dep("Contour.Core.Util")
+.out({
+    name : "Core.MVC.Controller",
+    dep  : "Core.Util"
+}).signUp();

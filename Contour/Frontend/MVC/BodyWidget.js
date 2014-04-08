@@ -1,5 +1,5 @@
 module.exports = new Contour.ClientScript.Module(
-    function (AbstractWidget) {
+    function (BaseWidget, CommonWidget) {
         function Widget() {
 
             this.actions = {
@@ -10,19 +10,15 @@ module.exports = new Contour.ClientScript.Module(
                 }
             };
 
-            /*this.run = function () {
-                this.getView().innerHTML = "Contour Basic MainWidget!";
-
-            };*/
-
-            AbstractWidget.call(this, document.getElementsByTagName("body")[0]);
+            // TODO documentWidget legyen a parent.
+            BaseWidget.call(this, document.getElementsByTagName("body")[0]);
         }
 
-        Widget.prototype             = AbstractWidget.prototype;
-        Widget.prototype.constructor = AbstractWidget;
+        Widget.prototype             = BaseWidget.prototype;
+        Widget.prototype.constructor = BaseWidget;
 
         return Widget;
 }).setName("Frontend.MVC.BodyWidget")
-.setDependencies("Core.MVC.Widget")
-.dep("Contour.Core.MVC.Widget")
+.setDependencies(["Core.MVC.Widget", "Frontend.MVC.CommonWidget"])
+.dep("Contour.Core.MVC.Widget", "Contour.Frontend.MVC.CommonWidget")
 .signUp();
