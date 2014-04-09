@@ -2,7 +2,6 @@ module.exports = new Module(
     function () {
         function DepChecker() {
             var dependencyArray = [];
-            var order = [];
 
             this.setDeps = function (depsObj) {
                 dependencyArray = depsObj;
@@ -22,17 +21,13 @@ module.exports = new Module(
 
                     var rightIndex = searchIndexAfterDeps(dependencyArray[i].dep);
 
-                    if (0 == rightIndex) {
-                        continue;
-                    }
-
                     if (i >= rightIndex) {
                         continue;
                     }
 
                     dependencyArray = putRightPlace(i, rightIndex, dependencyArray[i]);
 
-                    i = 0;
+                    i--;
                 }
             };
 

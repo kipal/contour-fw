@@ -51,7 +51,11 @@ module.exports = new Module(
                 return this;
             }
 
-            this.signUp = function () {
+            this.signUp = function (config) {
+                if (undefined !== config) {
+                    this.out(config);
+                }
+
                 switch (visibility) {
                     case "public":
                         register.addPublicModule(moduleName, moduleReference, dependencies);
