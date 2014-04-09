@@ -8,51 +8,7 @@ module.exports = new Contour.ClientScript.Module(
                 }
             }
 
-            var styleDom = null;
-
-            var styles   = {};
-
-            var cssGenerator = function (selector, describeObj) {
-                var result = selector + " {\n";
-                for (var i in describeObj) {
-                    if (describeObj.hasOwnProperty(i)) {
-                        result += i + ":" + describeObj[i] + ";\n"
-                    }
-                }
-                result += "}\n";
-
-                return result;
-            };
-
-            var fillStyleDom = function () {
-
-                styleDom.innerHTML = "";
-
-
-                for (var i in styles) {
-                    if (styles.hasOwnProperty(i)) {
-                        styleDom.innerHTML += cssGenerator(i, styles[i]);
-                    }
-                }
-            };
-
-            this.addStyle = function (selector, describeObj) {
-                if (null === styleDom) {
-                    styleDom = this.appendNode("style");
-                }
-
-                if (undefined === styles[selector]) {
-                    styles[selector] = {};
-                }
-
-                for (var i in describeObj) {
-                    if (describeObj.hasOwnProperty(i)) {
-                        styles[selector][i] = describeObj[i];
-                    }
-                }
-
-                 fillStyleDom();
-            };
+            this.addStyle = View.addStyle;
 
             this.appendNode = function (element) {
 
@@ -78,6 +34,53 @@ module.exports = new Contour.ClientScript.Module(
                 return tmp[tmp.length - 1];
             };
         }
+
+        var styleDom = null;
+
+        var styles   = {};
+
+        var cssGenerator = function (selector, describeObj) {
+            var result = selector + " {\n";
+            for (var i in describeObj) {
+                if (describeObj.hasOwnProperty(i)) {
+                    result += i + ":" + describeObj[i] + ";\n"
+                }
+            }
+            result += "}\n";
+
+            return result;
+        };
+
+        var fillStyleDom = function () {
+
+            styleDom.innerHTML = "";
+
+
+            for (var i in styles) {
+                if (styles.hasOwnProperty(i)) {
+                    styleDom.innerHTML += cssGenerator(i, styles[i]);
+                }
+            }
+        };
+
+        View.addStyle = function (selector, describeObj) {
+            if (null === styleDom) {
+                styleDom = this.appendNode("style");
+            }
+
+            if (undefined === styles[selector]) {
+                styles[selector] = {};
+            }
+
+            for (var i in describeObj) {
+                if (describeObj.hasOwnProperty(i)) {
+                    styles[selector][i] = describeObj[i];
+                }
+            }
+
+             fillStyleDom();
+        };
+
 
         return View;
 }).setName("Core.MVC.View").signUp();

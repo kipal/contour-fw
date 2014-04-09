@@ -2,14 +2,6 @@ module.exports = new Contour.ClientScript.Module(
     function (BaseWidget, CommonWidget) {
         function Widget() {
 
-            this.actions = {
-                onclick : function () {
-                    /* <publish>
-                      alert("onclick");
-                     </publish> */
-                }
-            };
-
             // TODO documentWidget legyen a parent.
             BaseWidget.call(this, document.getElementsByTagName("body")[0]);
         }
