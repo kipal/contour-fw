@@ -16,7 +16,7 @@ module.exports = new Module(
                     case '/app':
 
                         return this.handleAppRequest();
-                    case '/q':
+                    case ResponseHandler.baseRequestEnd:
 
                         return this.handleOtherRequest(request);
                 }
@@ -45,9 +45,13 @@ module.exports = new Module(
             };
 
             this.handleOtherRequest = function (request) {
-                return  new Response().setBody(request);
+                request = JSON.parse(request);
+
+                return  new Response().setBody(Router.getResponse(request));
             };
         }
+
+        ResponseHandler.baseRequestEnd = '/q';
 
         return ResponseHandler;
     }

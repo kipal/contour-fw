@@ -6,10 +6,7 @@ module.exports = new Contour.ClientScript.Module(
                 "Content-Type" : "application/javascript"
             };
 
-            this.body   = {
-                method : "",
-                params : {}
-            };
+            this.body   = {};
         }
 
         Response.prototype.setHeader = function (header) {
@@ -19,7 +16,12 @@ module.exports = new Contour.ClientScript.Module(
         };
 
         Response.prototype.setBody = function (body) {
-            this.body = body;
+
+            if ("object" === typeof body) {
+                this.body = JSON.stringify(body);
+            } else {
+                this.body = body;
+            }
 
             return this;
         };
