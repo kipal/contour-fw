@@ -1,5 +1,5 @@
 module.exports = new Module(
-    function (AbstractResponseHandler, Response) {
+    function (AbstractResponseHandler, Response, Request) {
         'use strict';
 
         function ResponseHandler(currentServiceRegister) {
@@ -18,7 +18,7 @@ module.exports = new Module(
                         return this.handleAppRequest();
                     case ResponseHandler.baseRequestEnd:
 
-                        return this.handleOtherRequest(request);
+                        return this.handleOtherRequest(Request.parse(request));
                 }
             };
 
@@ -37,17 +37,16 @@ module.exports = new Module(
             };
 
             this.handleContourRequest = function () {
-                return new Response().setBody(Contour.ClientScript.Module.getRegister().printAll());
+                return new Response().setHeader({"Content-Type" : "text/javascript"}).setBody(Contour.ClientScript.Module.getRegister().printAll());
             };
 
             this.handleAppRequest     = function () {
-                return new Response().setBody(currentServiceRegister.printAll());
+                return new Response().setHeader({"Content-Type" : "text/javascript"}).setBody(currentServiceRegister.printAll());
             };
 
             this.handleOtherRequest = function (request) {
-                request = JSON.parse(request);
 
-                return  new Response().setBody(Router.getResponse(request));
+                return new Response().setBody(Router.getResponse(request));
             };
         }
 
@@ -56,4 +55,4 @@ module.exports = new Module(
         return ResponseHandler;
     }
 
-).dep("Contour.Core.Http.AbstractResponseHandler", "Contour.Core.Http.Response");
+).dep("Contour.Core.Http.AbstractResponseHandler", "Contour.Core.Http.Response", "Contour.Core.Http.Request");

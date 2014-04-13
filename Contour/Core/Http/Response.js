@@ -15,12 +15,20 @@ module.exports = new Contour.ClientScript.Module(
             return this;
         };
 
-        Response.prototype.setBody = function (body) {
+        Response.prototype.setBody = function (body, error) {
+            if (!this.header["Content-Type"].match(/application\/javascript/)) {
+
+                this.body = body;
+            } else {
+                body = {
+                        data  : body,
+                        error : error
+                };
+
+            }
 
             if ("object" === typeof body) {
                 this.body = JSON.stringify(body);
-            } else {
-                this.body = body;
             }
 
             return this;

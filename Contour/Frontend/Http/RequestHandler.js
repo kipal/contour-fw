@@ -1,17 +1,16 @@
 module.exports = new Contour.ClientScript.Module(
-    function (Request, Response) {
+    function (BaseReqHandler, Response) {
 
         // TODO singleton.
         function RequestHandler() {
+            BaseReqHandler.call(this);
+
             var baseRequestEnd = "/* *end* */",
                 ajaxRequest    = new XMLHttpRequest();
 
             ajaxRequest.open("POST", baseRequestEnd, true);
 
             this.sendRequest = function (request, responseCallback) {
-                if (!(request instanceof Request)) {
-                    return false;
-                }
 
                 ajaxRequest.send(JSON.stringify(request));
 
@@ -23,22 +22,22 @@ module.exports = new Contour.ClientScript.Module(
                             console.error("Error in " + JSON.stringify(request) + " request sending.");
                         }
                     }
-
-
-                }
+                };
             };
-
         }
+
+        RequestHandler.prototype             = BaseReqHandler.prototype;
+        RequestHandler.prototype.constructor = RequestHandler;
 
 
         return RequestHandler;
     }
 ).signUp({
     "name"     : "Frontend.Http.RequestHandler",
-    "dep"      : ["Frontend.Http.Request", "Core.Http.Response"],
+    "dep"      : ["Core.Http.RequestHandler", "Core.Http.Request", "Core.Http.Response"],
     "callback" : function (moduleStr) {
         responseHandler = require(__dirname + "/ResponseHandler.js").getReference();
 
         return moduleStr.replace(/\/\* \*end\* \*\//, responseHandler.baseRequestEnd);
     }
-}).dep("Contour.Frontend.Http.Request", "Contour.Core.Http.Response");
+}).dep("Contour.Core.Http.RequestHandler", "Contour.Core.Http.Request", "Contour.Core.Http.Response");

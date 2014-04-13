@@ -1,28 +1,24 @@
 module.exports = new Contour.ClientScript.Module(
-    function () {
+    function (Request) {
 
         function RequestHandler() {
 
-            var httpRequest = new XMLHttpRequest();
-
-            this.send = function (request) {
-                if (!(request instanceof Contour.Core.Http.Request)) {
-                    console.log("hát nem megyen.")
-                    return false;
+            this.send = function (request, responseCallback) {
+                if (!(request instanceof Request)) {
+                    throw 'request type is not instance of Contour.Core.Http.Request';
                 }
 
-                httpRequest.onreadystatechange = function() {
-                    if (4 === httpRequest.readyState) {
-
-                        request.setResponse(JSON.parse(httpRequest.responseText));
-                    }
-                };
-
-                httpRequest.open("POST", "/q", true);
-                httpRequest.send(request.toJSON());
+                this.sendRequest(request, responseCallback);
             };
         }
 
+        RequestHandler.prototype.sendRequest = function (request, responseCallback) {
+            throw 'RequestHandler::sendRequest() is an abstract method!';
+        };
+
         return RequestHandler;
     }
-).setName("Core.Http.RequestHandler").signUp();
+).dep("Contour.Core.Http.Request").signUp({
+    name : "Core.Http.RequestHandler",
+    dep  : "Core.Http.Request"
+});
