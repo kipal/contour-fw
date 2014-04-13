@@ -27,15 +27,12 @@ module.exports = new Contour.ClientScript.Module(
         }
 
         /* <private> */
+        Bootstrap.prototype.setCurrentServer = function (server) {
+            this.server = server;
+        };
+
         Bootstrap.prototype.getCurrentServer = function () {
-            var serverList = this.getConfig().servers;
-            for (var type in serverList) {
-                for (var i in serverList[type]) {
-                    if (serverList[type][i].getIsCurrent()) {
-                        return serverList[type][i];
-                    }
-                }
-            }
+            return this.server;
         };
 
         Bootstrap.prototype.run = function () {
