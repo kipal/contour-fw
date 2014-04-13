@@ -21,44 +21,49 @@ module.exports = new Module(
                 throw 'Contour.DB.Http.ResponseHandler::delete() is an abstract method!';
             };
 
-            this.getResponse = function (path, request) {
-                if ("/" !== path) {
-                    var msg = "The '" + path + "' path is unknown!";
-                    console.log(msg);
+            return ResponseHandler;
+        };
 
-                    return new Response().setHeader({"Content-Type" : "text/html"}).setBody(msg);
-                }
+        ResponseHandler.prototype.getResponse = function (path, request) {
+            if ("/" !== path) {
+                var msg = "The '" + path + "' path is unknown!";
+                console.log(msg);
 
-                try {
-                    request = Request.parse(request);
-                } catch (e) {
-                    console.log(e);
+                return new Response().setHeader({"Content-Type" : "text/html"}).setBody(msg);
+            }
 
-                    return new Response().setBody(undefined, 'The request is not standard!');
-                }
+            try {
+                request = Request.parse(request);
+            } catch (e) {
+                console.log(e);
 
-                if (
-                    undefined === this[request.method]
-                    || !(this[request.method] instanceof Function)
-                ) {
-                    var msg = "Not found '" + request['method'] + "' method!";
-                    console.log(msg);
+                return new Response().setBody(undefined, 'The request is not standard!');
+            }
 
-                    return new Response().setBody(undefined, msg);
-                }
+            if (
+                undefined === this[request.method]
+                || !(this[request.method] instanceof Function)
+            ) {
+                var msg = "Not found '" + request['method'] + "' method!";
+                console.log(msg);
 
-                try {
+                return new Response().setBody(undefined, msg);
+            }
 
-                    return new Response().setBody(this[request.method](request.params));
-                } catch (e) {
-                    console.log(e);
+            try {
 
-                    return new Response().setBody(undefined, 'Error in query!');
-                }
-            };
-        }
+                return new Response().setBody(this[request.method](request.params));
+            } catch (e) {
+                console.log(e);
 
-        return ResponseHandler;
+
+                return new Response().setBody(undefined, 'Error in query!');
+            }
+        };
+
+        ResponseHandler.prototype.query = function (callback) {
+
+        };
     }
 
 ).dep("Contour.Core.Http.AbstractResponseHandler", "Contour.Core.Http.Response", "Contour.Core.Http.Request");
