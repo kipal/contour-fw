@@ -2,7 +2,7 @@ module.exports = new Module(
     function (AbstractResponseHandler, Response, Request) {
         'use strict';
 
-        function ResponseHandler(currentServiceRegister) {
+        function ResponseHandler(currentServiceRegister, router) {
             AbstractResponseHandler.call(this);
 
             this.getResponse = function (path, request) {
@@ -46,7 +46,7 @@ module.exports = new Module(
 
             this.handleOtherRequest = function (request) {
 
-                return new Response().setBody(Router.getResponse(request));
+                return new Response().setBody(router.getResponse(request));
             };
         }
 

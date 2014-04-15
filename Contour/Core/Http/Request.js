@@ -10,7 +10,7 @@ module.exports = new Contour.ClientScript.Module(
             if (undefined === raw || null === raw || "" === raw) {
                 throw 'Empty request!';
             }
-            console.log(raw)
+
             var content = JSON.parse(raw),
                 req = new Request();
 
