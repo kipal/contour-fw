@@ -14,10 +14,10 @@ module.exports = new Contour.ClientScript.Module(
             var baseRequestEnd = "*end*",
                 ajaxRequest    = new XMLHttpRequest();
 
-            ajaxRequest.open("POST", baseRequestEnd, true);
 
             this.sendRequest = function (request, responseCallback) {
 
+                ajaxRequest.open("POST", baseRequestEnd, true);
                 ajaxRequest.send(JSON.stringify(request));
 
                 ajaxRequest.onreadystatechange = function() {
@@ -29,6 +29,7 @@ module.exports = new Contour.ClientScript.Module(
                         }
                     }
                 };
+
             };
 
             var serverConfig = *serverConfig*;
