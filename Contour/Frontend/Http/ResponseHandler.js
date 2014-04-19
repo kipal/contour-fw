@@ -5,21 +5,36 @@ module.exports = new Module(
         function ResponseHandler(currentServiceRegister, router) {
             AbstractResponseHandler.call(this);
 
-            this.getResponse = function (path, request) {
+            this.getResponse = function (path, request, out) {
+                var result = {};
                 switch (path) {
                     case '/':
 
-                        return this.handleFirstRequest();
+                        result = this.handleFirstRequest();
+                        break;
                     case '/contour':
 
-                        return this.handleContourRequest();
+                        result = this.handleContourRequest();
+                        break;
                     case '/app':
 
-                        return this.handleAppRequest();
+                        result = this.handleAppRequest();
+                        break;
                     case ResponseHandler.baseRequestEnd:
 
-                        return this.handleOtherRequest(Request.parse(request));
+                        return this.handleOtherRequest(Request.parse(request), out);
+                    default:
+                        result = new Response();
+                        result.setHeader({
+                            "Content-Type" : "text/javascript"
+                        });
+                        result.setBody({
+                            "error" : "Untreated request!"
+                        });
                 }
+
+                out.header(result.statusCode, result.header);
+                out.body(result.body);
             };
 
             this.handleFirstRequest = function () {
@@ -44,9 +59,9 @@ module.exports = new Module(
                 return new Response().setHeader({"Content-Type" : "text/javascript"}).setBody(currentServiceRegister.printAll());
             };
 
-            this.handleOtherRequest = function (request) {
+            this.handleOtherRequest = function (request, out) {
 
-                return new Response().setBody(router.getResponse(request));
+                return new Response().setBody(router.getResponse(request, out));
             };
         }
 

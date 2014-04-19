@@ -50,17 +50,23 @@ module.exports = new Module(
                 });
 
                 request.on('end', function () {
-                    var pathName = url.parse(request.url).pathname,
-                        res      = responseHandler.getResponse(pathName, body);
+                    var pathName = url.parse(request.url).pathname;
 
-                    if (res) {
-                        response.writeHeader(200, res.header);
-
-                        return response.end(res.body);
-                    } else {
-                        return response.end("Kezeletlen, valószínűleg static!");
-                    }
-
+                    responseHandler.getResponse(
+                        pathName,
+                        body,
+                        {
+                            body   : function (b) {
+                                if ("string" != typeof b) {
+                                    b = JSON.stringify(b)
+                                }
+                                response.end(b);
+                            },
+                            header : function (s, h) {
+                                response.writeHeader(s, h);
+                            }
+                        }
+                    );
                 });
             };
 

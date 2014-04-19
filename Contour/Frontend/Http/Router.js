@@ -4,12 +4,12 @@ module.exports = new Module(
         function Router(reqHandler) {
 
 
-            this.getResponse = function(request) {
+            this.getResponse = function(request, out) {
                 if ("frontend" !== request.api) {
                     //TODO na ez hogyan legyen? :)
                 }
 
-                return reqHandler.sendRequest(request);
+                reqHandler.sendApiRequest(request, out);
             };
         }
 

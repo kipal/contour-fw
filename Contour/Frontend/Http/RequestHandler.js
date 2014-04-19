@@ -43,38 +43,53 @@ module.exports = new Contour.ClientScript.Module(
                 serverConfig = config;
             };
 
-            this.getApi = function (apiName) {
+            this.getApi = function (aliasName) {
                 for (var i in serverConfig.api) {
-                    if (apiName === serverConfig.api[i].alias) {
+                    if (aliasName == serverConfig.api[i].alias) {
 
-                        return serverConfig[i];
+                        return serverConfig.api[i];
                     }
                 }
 
                 return false;
             };
 
-            this.sendRequest = function(request) {
+            var http = require("http");
+
+            this.sendApiRequest = function(request, out) {
                 var config = this.getApi(request.api);
 
                 var options = {
-                    host: url,
-                    port: 80,
-                    path: '/resource?id=foo&bar=baz',
-                    method: 'POST'
+                    host: config.host,
+                    port: config.port,
+                    path: '/',
+                    method: 'POST',
+                    headers: {
+                        Host: config.host
+                    }
                 };
 
-                http.request(options, function(res) {
+                var apiReq = http.request(options, function(res) {
                     console.log('STATUS: ' + res.statusCode);
                     console.log('HEADERS: ' + JSON.stringify(res.headers));
 
                     res.setEncoding('utf8');
 
+                    body = "";
                     res.on('data', function (chunk) {
-                        console.log('BODY: ' + chunk);
+                        body += chunk;
                     });
 
-                }).end();
+                    res.on("end", function() {
+                        console.log(body);
+                        out.header(200, {"Content-Type" : "text/javascript"});
+                        out.body(body);
+                    });
+
+                });
+
+                apiReq.write(JSON.stringify(request));
+                apiReq.end();
             };
 
 

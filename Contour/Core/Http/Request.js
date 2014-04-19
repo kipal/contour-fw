@@ -17,7 +17,6 @@ module.exports = new Contour.ClientScript.Module(
             if (
                 undefined === content['api']
                 || undefined === content['method']
-                || undefined === content['params']
             ) {
                 throw ("Not standard request: " + raw);
             }

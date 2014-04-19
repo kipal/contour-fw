@@ -6,8 +6,16 @@ module.exports = new Contour.ClientScript.Module(
                 "Content-Type" : "application/javascript"
             };
 
+            this.statusCode = 200;
+
             this.body   = {};
         }
+
+        Response.prototype.setStatusCode = function (statusCode) {
+            this.statusCode = statusCode;
+
+            return this;
+        };
 
         Response.prototype.setHeader = function (header) {
             this.header = header;
