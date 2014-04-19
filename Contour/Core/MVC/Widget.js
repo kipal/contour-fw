@@ -5,18 +5,21 @@ module.exports = new Contour.ClientScript.Module(
             var subWidgets = [];
 
             Util.lateBind(
-                'createView',
-                function () {
-                    Contour.Core.MVC.View.call(parentDom, this.actions);
-                }.call(this),
-                this
+                    'createView',
+                    function () {
+                        Contour.Core.MVC.View.call(parentDom, this.actions);
+                    }.call(this),
+                    this
             );
+
+            this.setEvent = function (eventName, fn, bind) {
+                this.getView().setEvent(eventName, fn, bind);
+            };
+
 
             this.getView = function () {
                 return parentDom;
             };
-
-            Util.lateBind("actions", {}, this);
 
             Util.lateBind(
                 "run",

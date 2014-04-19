@@ -1,12 +1,19 @@
 module.exports = new Contour.ClientScript.Module(
     function () {
-        function View(actions) {
+        function View() {
 
-            for (var i in actions) {
+            this.setEvent = function (eventName, fn, forceBind) {
+                if (forceBind) {
+                    this[eventName] = fn.bind(this);
+                } else {
+                    this[eventName] = fn.bind(this);
+                }
+            };
+            /*for (var i in actions) {
                 if (actions.hasOwnProperty(i)) {
                     this[i] = actions[i];
                 }
-            }
+            }*/
 
             this.addStyle = View.addStyle;
 
