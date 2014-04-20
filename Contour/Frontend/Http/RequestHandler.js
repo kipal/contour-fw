@@ -71,9 +71,6 @@ module.exports = new Contour.ClientScript.Module(
                 };
 
                 var apiReq = http.request(options, function(res) {
-                    console.log('STATUS: ' + res.statusCode);
-                    console.log('HEADERS: ' + JSON.stringify(res.headers));
-
                     res.setEncoding('utf8');
 
                     body = "";
@@ -82,13 +79,19 @@ module.exports = new Contour.ClientScript.Module(
                     });
 
                     res.on("end", function() {
-                        console.log(body);
-                        out.header(200, {"Content-Type" : "text/javascript"});
+                        out.header(200, {"Content-Type" : "application/json"});
                         out.body(body);
                     });
 
                 });
 
+                apiReq.on(
+                    "error",
+                    function(e) {
+                        out.header(200, {"Content-Type" : "application/json"});
+                        out.body({"error": e});
+                    }
+                );
                 apiReq.write(JSON.stringify(request));
                 apiReq.end();
             };

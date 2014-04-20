@@ -58,7 +58,7 @@ module.exports = new Module(
                         {
                             body   : function (b) {
                                 if ("string" != typeof b) {
-                                    b = JSON.stringify(b)
+                                    b = JSON.stringify(b);
                                 }
                                 response.end(b);
                             },
