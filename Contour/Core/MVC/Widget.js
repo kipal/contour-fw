@@ -1,5 +1,5 @@
 module.exports = new Contour.ClientScript.Module(
-    function (BaseController, Util) {
+    function (BaseController, Util, View) {
         function Widget(parentDom, parentWidget) {
 
             var subWidgets = [];
@@ -7,7 +7,7 @@ module.exports = new Contour.ClientScript.Module(
             Util.lateBind(
                     'createView',
                     function () {
-                        Contour.Core.MVC.View.call(parentDom, this.actions);
+                        View.call(parentDom, this.actions);
                     }.call(this),
                     this
             );
@@ -44,4 +44,5 @@ module.exports = new Contour.ClientScript.Module(
 
 
         return Widget;
-}).dep("Contour.Core.MVC.Controller", "Contour.Core.Util").setDependencies(["Core.MVC.Controller", "Core.Util"]).setName("Core.MVC.Widget").signUp();
+}).dep("Contour.Core.MVC.Controller", "Contour.Core.Util", "Contour.Frontend.MVC.View")
+.setDependencies(["Core.MVC.Controller", "Core.Util", "Frontend.MVC.View"]).setName("Core.MVC.Widget").signUp();

@@ -1,5 +1,5 @@
 module.exports = new Contour.ClientScript.Module(
-    function () {
+    function (LinkCreator) {
         function View() {
 
             this.setEvent = function (eventName, fn, forceBind) {
@@ -39,6 +39,12 @@ module.exports = new Contour.ClientScript.Module(
                 var tmp = this.getElementsByTagName(tagName);
 
                 return tmp[tmp.length - 1];
+            };
+
+            this.getImgSrc = LinkCreator.getImgSrc;
+
+            this.getImgSrcForCss = function (path) {
+                return "url(" + this.getImgSrc(path) + ")";
             };
         }
 
@@ -90,4 +96,7 @@ module.exports = new Contour.ClientScript.Module(
 
 
         return View;
-}).setName("Core.MVC.View").signUp();
+}).signUp({
+    name : "Frontend.MVC.View",
+    dep  : ["Frontend.Http.LinkCreator"]
+}).dep("Contour.Frontend.Http.LinkCreator");
