@@ -23,6 +23,9 @@ module.exports = new Module(
                     case ResponseHandler.baseRequestEnd:
 
                         return this.handleOtherRequest(Request.parse(request), out);
+                    case '/favicon.ico':
+                        result = this.redirectToFavicon();
+                        break;
                     default:
                         result = new Response();
                         result.setHeader({
@@ -57,6 +60,16 @@ module.exports = new Module(
 
             this.handleAppRequest     = function () {
                 return new Response().setHeader({"Content-Type" : "text/javascript"}).setBody(currentServiceRegister.printAll());
+            };
+
+            this.redirectToFavicon    = function () {
+                var resp = new Response();
+                resp.statusCode = 302;
+                resp.setHeader({
+                    'Location': '/static/favicon.ico'
+                });
+
+                return resp;
             };
 
             this.handleOtherRequest = function (request, out) {
