@@ -23,7 +23,7 @@ module.exports = new Contour.ClientScript.Module(
                 ajaxRequest.onreadystatechange = function() {
                     if (4 == ajaxRequest.readyState) {
                         if (200 == ajaxRequest.status) {
-                            responseCallback(ajaxRequest.responseText);
+                            responseCallback(JSON.parse(ajaxRequest.responseText));
                         } else {
                             console.error("Error in " + JSON.stringify(request) + " request sending.");
                         }
