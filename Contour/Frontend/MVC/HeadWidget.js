@@ -6,8 +6,15 @@ module.exports = new Contour.ClientScript.Module(
                 document.title = title;
             };
 
-            this.run = function () {
+            this.addBootstrapCss = function () {
+                css = this.getView().appendNode("link");
+                css.rel  = "stylesheet";
+                css.type = "text/css";
+                css.href = "static/bootstrap.css";
+            };
 
+            this.run = function () {
+                this.addBootstrapCss();
             };
             BaseWidget.call(this, document.getElementsByTagName("head")[0]);
         }
