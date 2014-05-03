@@ -17,14 +17,34 @@ module.exports = new Contour.ClientScript.Module(
 
             this.addStyle = View.addStyle;
 
-            this.appendNode = function (element) {
+            this.appendNode = function (element, moduleName) {
+                if (false === moduleName) {
+                    return this.appendChild(document.createElement(element));
+                }
 
-                return this.appendChild(document.createElement(element));
+                if (undefined === moduleName || null === moduleName) {
+                    moduleName = View;
+                }
+
+                var tmp = this.appendChild(document.createElement(element));
+                moduleName.call(tmp);
+
+                return tmp;
             };
 
-            this.prependNode = function (element) {
+            this.prependNode = function (element, moduleName) {
+                if (false === moduleName) {
+                    return this.insertBefore(document.createElement(element), this.firstChild);
+                }
 
-                return this.insertBefore(document.createElement(element), this.firstChild);
+                if (undefined === moduleName || null === moduleName) {
+                    moduleName = View;
+                }
+
+                var tmp = this.insertBefore(document.createElement(element), this.firstChild);
+                moduleName.call(tmp);
+
+                return tmp;
             };
 
             this.getNodesByTag = function(tagName) {
