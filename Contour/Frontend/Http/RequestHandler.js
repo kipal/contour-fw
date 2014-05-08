@@ -149,7 +149,7 @@ module.exports = new Contour.ClientScript.Module(
 
         var tmp = moduleStr.replace(/\*end\*/, responseHandler.baseRequestEnd);
 
-        var origServerConfig = require(Service.basePath + "/../config/server-config.js");
+        var origServerConfig = require(Service.basePath + "/../config/NodeMongoAdmin-CONFIG/server-config.js");
         var serverConfig     = {};
 
         for (var i in origServerConfig.api) {
