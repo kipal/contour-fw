@@ -36,9 +36,8 @@ module.exports = new Contour.ClientScript.Module(
 
         return CommonWidget;
     }
-).out({
+)
+.signUp({
     name : "Frontend.MVC.CommonWidget",
-    dep  : ["Core.MVC.Widget", "Frontend.Http.RequestHandler"]
-})
-.dep("Contour.Core.MVC.Widget", "Contour.Frontend.Http.RequestHandler")
-.signUp();
+    dep  : ["Contour.Core.MVC.Widget", "Contour.Frontend.Http.RequestHandler"]
+});
