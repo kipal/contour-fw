@@ -74,4 +74,6 @@ module.exports = new Contour.ClientScript.Module(
 
         return Util;
     }
-).out({"name" : "Core.Util"}).signUp();
+).signUp({
+    "name" : "Core.Util"
+});

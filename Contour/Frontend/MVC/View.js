@@ -145,5 +145,5 @@ module.exports = new Contour.ClientScript.Module(
         return View;
 }).signUp({
     name : "Frontend.MVC.View",
-    dep  : ["Frontend.Http.LinkCreator"]
-}).dep("Contour.Frontend.Http.LinkCreator");
+    dep  : ["Contour.Frontend.Http.LinkCreator"]
+});

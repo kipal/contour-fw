@@ -68,5 +68,11 @@ module.exports = new Contour.ClientScript.Module(
 
 
         return Widget;
-}).dep("Contour.Core.MVC.Controller", "Contour.Core.Util", "Contour.Frontend.MVC.View")
-.setDependencies(["Core.MVC.Controller", "Core.Util", "Frontend.MVC.View"]).setName("Core.MVC.Widget").signUp();
+}).signUp({
+    name : "Core.MVC.Widget",
+    dep  : [
+        "Contour.Core.MVC.Controller",
+        "Contour.Core.Util",
+        "Contour.Frontend.MVC.View"
+    ]
+});
