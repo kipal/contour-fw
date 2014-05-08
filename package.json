@@ -1,7 +1,7 @@
 {
   "author": "Nándor Kiss <kipal42@gmail.com> (http://github.com/kipal/)",
   "name": "contour-fw",
-  "version": "0.0.10-dev",
+  "version": "0.0.11-dev",
   "description": "Contour Framework - Javascirpt framework.",
   "keywords": ["contour-fw", "framework", "library"],
   "homepage": "https://github.com/kipal/contour-fw",
@@ -30,7 +30,6 @@
     "node": ">=0.6.0"
   },
   "dependencies": {
-	"contour-require-directory" : ">=1.0.1",
-	"mongodb" : ">=1.4.3"
+	"contour-require-directory" : ">=1.0.1"
   }
 }
