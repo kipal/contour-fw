@@ -24,7 +24,7 @@
 module.exports = (function (config) {
     'use strict';
 
-    global.requireDir = require("node-require-directory");
+    global.requireDir = require("contour-require-directory");
 
     global.Contour    = {
         basePath : __dirname + "/Contour"
