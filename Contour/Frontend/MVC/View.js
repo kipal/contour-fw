@@ -23,20 +23,17 @@
  ******************************************************************************/
 module.exports = new Contour.ClientScript.Module(
     function (LinkCreator) {
-        function View() {
+        function View(actions) {
 
-            this.setEvent = function (eventName, fn, forceBind) {
-                if (forceBind) {
-                    this[eventName] = fn.bind(this);
-                } else {
-                    this[eventName] = fn.bind(this);
-                }
+            this.setEvent = function (eventName, fn) {
+                this[eventName] = fn;
             };
-            /*for (var i in actions) {
+
+            for (var i in actions) {
                 if (actions.hasOwnProperty(i)) {
-                    this[i] = actions[i];
+                    this.setEvent(i, actions[i]);
                 }
-            }*/
+            }
 
             this.addStyle = View.addStyle;
 
