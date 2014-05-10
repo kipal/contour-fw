@@ -38,7 +38,7 @@ module.exports = new Contour.ClientScript.Module(
                 ajaxRequest    = new XMLHttpRequest();
 
 
-            this.sendRequest = function (request, responseCallback) {
+            this.sendRequest = function (request, responseCallback, errorResponse, waitResponse) {
 
                 ajaxRequest.open("POST", baseRequestEnd, true);
                 ajaxRequest.send(JSON.stringify(request));
@@ -54,9 +54,26 @@ module.exports = new Contour.ClientScript.Module(
                                     "error" : ajaxRequest.responseText
                                 };
                             }
-                            responseCallback(respObj);
+
+                            if (respObj["error"]) {
+                                if (errorResponse) {
+                                    errorResponse(respObj);
+                                } else {
+                                    console.log("Untreat error: " + respObj);
+                                }
+                            } else {
+                                responseCallback(respObj);
+                            }
                         } else {
-                            console.error("Error in " + JSON.stringify(request) + " request sending.");
+                            if (errorResponse) {
+                                errorResponse(respObj);
+                            } else {
+                                console.log("Untreat error: " + respObj);
+                            }
+                        }
+                    } else if (3 == ajaxRequest.readyState) {
+                        if (waitResponse) {
+                            waitResponse();
                         }
                     }
                 };
