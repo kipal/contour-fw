@@ -26,7 +26,7 @@ module.exports = new Contour.ClientScript.Module(
         function Response() {
 
             this.header = {
-                "Content-Type" : "application/javascript"
+                "Content-Type" : "application/json"
             };
 
             this.statusCode = 200;
@@ -47,7 +47,7 @@ module.exports = new Contour.ClientScript.Module(
         };
 
         Response.prototype.setBody = function (body, error) {
-            if (!this.header["Content-Type"].match(/application\/javascript/)) {
+            if (!this.header["Content-Type"].match(/application\/json/)) {
 
                 this.body = body;
             } else {
@@ -63,6 +63,10 @@ module.exports = new Contour.ClientScript.Module(
             }
 
             return this;
+        };
+
+        Response.prototype.toJSON = function () {
+            return this.body;
         };
 
         return Response;

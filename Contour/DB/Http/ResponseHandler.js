@@ -22,7 +22,7 @@
  * SOFTWARE.
  ******************************************************************************/
 module.exports = new Module(
-    function (AbstractResponseHandler, Response, Request) {
+    function (AbstractResponseHandler) {
         'use strict';
 
         function ResponseHandler() {
@@ -73,4 +73,4 @@ module.exports = new Module(
         return ResponseHandler;
     }
 
-).dep("Contour.Core.Http.ResponseHandler", "Contour.Core.Http.Response", "Contour.Core.Http.Request");
+).dep("Contour.Core.Http.ResponseHandler");
