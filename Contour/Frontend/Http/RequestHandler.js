@@ -80,8 +80,6 @@ module.exports = new Contour.ClientScript.Module(
 
             };
 
-            var serverConfig = *serverConfig*;
-
             </publish> */
 
             instance = this;
@@ -164,23 +162,6 @@ module.exports = new Contour.ClientScript.Module(
     "callback" : function (moduleStr) {
         responseHandler = require(__dirname + "/ResponseHandler.js").getReference();
 
-        var tmp = moduleStr.replace(/\*end\*/, responseHandler.baseRequestEnd);
-
-        var origServerConfig = require(Service.basePath + "/../config/NodeMongoAdmin-CONFIG/server-config.js");
-        var serverConfig     = {};
-
-        for (var i in origServerConfig.api) {
-            for (var key in origServerConfig.api[i]){
-                switch (key) {
-                    case "alias":
-                        serverConfig[origServerConfig.api[i]["alias"]] = {
-                            methods : origServerConfig.api[i]["methods"]
-                        };
-                        break;
-                }
-            }
-        }
-
-        return tmp.replace(/\*serverConfig\*/, JSON.stringify(serverConfig, undefined, "    "));
+        return moduleStr.replace(/\*end\*/, responseHandler.baseRequestEnd);
     }
 });
