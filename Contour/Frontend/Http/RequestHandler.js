@@ -47,6 +47,7 @@ module.exports = new Contour.ClientScript.Module(
                     if (4 == ajaxRequest.readyState) {
                         if (200 == ajaxRequest.status) {
                             var respObj;
+
                             try {
                                 respObj = JSON.parse(ajaxRequest.responseText);
                             } catch (e) {
@@ -66,9 +67,9 @@ module.exports = new Contour.ClientScript.Module(
                             }
                         } else {
                             if (errorResponse) {
-                                errorResponse(respObj);
+                                errorResponse();
                             } else {
-                                console.log("Untreat error: " + JSON.stringify(respObj));
+                                console.log("Untreat error: " + ajaxRequest.responseText);
                             }
                         }
                     } else if (3 == ajaxRequest.readyState) {

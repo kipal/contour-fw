@@ -25,11 +25,13 @@ module.exports = new Contour.ClientScript.Module(
     function (LinkCreator) {
         function View(actions) {
 
+            var i;
+
             this.setEvent = function (eventName, fn) {
                 this[eventName] = fn;
             };
 
-            for (var i in actions) {
+            for (i in actions) {
                 if (actions.hasOwnProperty(i)) {
                     this.setEvent(i, actions[i]);
                 }
@@ -97,10 +99,11 @@ module.exports = new Contour.ClientScript.Module(
         var styles   = {};
 
         var cssGenerator = function (selector, describeObj) {
-            var result = selector + " {\n";
-            for (var i in describeObj) {
+            var result = selector + " {\n",
+                i;
+            for (i in describeObj) {
                 if (describeObj.hasOwnProperty(i)) {
-                    result += i + ":" + describeObj[i] + ";\n"
+                    result += i + ":" + describeObj[i] + ";\n";
                 }
             }
             result += "}\n";
@@ -109,11 +112,11 @@ module.exports = new Contour.ClientScript.Module(
         };
 
         var fillStyleDom = function () {
+            var i;
 
             styleDom.innerHTML = "";
 
-
-            for (var i in styles) {
+            for (i in styles) {
                 if (styles.hasOwnProperty(i)) {
                     styleDom.innerHTML += cssGenerator(i, styles[i]);
                 }
@@ -121,6 +124,8 @@ module.exports = new Contour.ClientScript.Module(
         };
 
         View.addStyle = function (selector, describeObj) {
+            var i;
+
             if (null === styleDom) {
                 styleDom = this.appendNode("style");
             }
@@ -129,7 +134,7 @@ module.exports = new Contour.ClientScript.Module(
                 styles[selector] = {};
             }
 
-            for (var i in describeObj) {
+            for (i in describeObj) {
                 if (describeObj.hasOwnProperty(i)) {
                     styles[selector][i] = describeObj[i];
                 }

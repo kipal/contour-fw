@@ -140,7 +140,7 @@ module.exports = new Module(
 
                 for (var i = 0; i < deps.length; i++) {
                     moduleName = deps[i].module;
-                    result += "\n    " + visibility + moduleName + " = " +  parser.parse(container[moduleName]["module"], container[moduleName]["dep"]) + "\n";
+                    result += "\n    " + visibility + moduleName + " = (" +  parser.parse(container[moduleName]["module"], container[moduleName]["dep"]) + ");\n";
                 }
 
                 return result;
@@ -161,7 +161,7 @@ module.exports = new Module(
                     return this.cache;
                 }
 
-                this.cache += "window." + rootName + " = (new function () {";
+                this.cache += "window." + rootName + " = (new function " + rootName + "() {";
 
                 this.cache += printInit();
 

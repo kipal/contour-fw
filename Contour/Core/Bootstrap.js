@@ -27,6 +27,10 @@ module.exports = new Contour.ClientScript.Module(
         function Bootstrap() {
             var config = {};
 
+            var isValidConfig = function (configVar) {
+                return true;
+            };
+
             // TODO ellenőrzés, hogy megvannak egy megfelelő kulcsok.
             this.setConfig = function (configVar) {
                 if (isValidConfig(configVar)) {
@@ -34,18 +38,14 @@ module.exports = new Contour.ClientScript.Module(
                 }
             };
 
-            var isValidConfig = function (configVar) {
-                return true;
-            };
 
             this.getConfig = function (key) {
                 if (undefined === key) {
 
                     return config;
-                } else {
-
-                    return config[key];
                 }
+
+                return config[key];
             };
         }
 

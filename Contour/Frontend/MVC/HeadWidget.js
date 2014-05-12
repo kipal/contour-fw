@@ -30,7 +30,7 @@ module.exports = new Contour.ClientScript.Module(
             };
 
             this.addBootstrapCss = function () {
-                css = this.getView().appendNode("link");
+                var css = this.getView().appendNode("link");
                 css.rel  = "stylesheet";
                 css.type = "text/css";
                 css.href = "static/bootstrap.css";

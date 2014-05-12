@@ -40,7 +40,7 @@ module.exports = new Module(
                         dependencies = "this." + dependencies;
                     }
 
-                    return "(" + dependencies + ");";
+                    return "(" + dependencies + ")";
                 }
 
                 if (0 < dependencies.length) {
@@ -49,10 +49,10 @@ module.exports = new Module(
                             dependencies[i] = "this." + dependencies[i];
                         }
                     }
-                    return "(" + dependencies.join(", ") + ");";
+                    return "(" + dependencies.join(", ") + ")";
                 }
 
-                return "();";
+                return "()";
             };
 
             this.parse = function (reference, dependencies) {

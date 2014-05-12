@@ -29,10 +29,11 @@ module.exports = new Contour.ClientScript.Module(
             String.prototype.repeat = function(n) {
                 return new Array(n + 1).join(this);
             };
-        };
+        }
 
         Util.isEmpty = function (o) {
-            for (var key in o) {
+            var key;
+            for (key in o) {
                 if (o.hasOwnProperty(key)) {
 
                     return false;
@@ -43,7 +44,8 @@ module.exports = new Contour.ClientScript.Module(
         };
 
         Util.deepExtend = function (child, parent) {
-            for (var i in parent) {
+            var i;
+            for (i in parent) {
                 if (parent.hasOwnProperty(i)) {
                     if ('object' === typeof parent[i]) {
 
